@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
+import Home from "./components/Home";
+import Error404 from "./components/Error404";
+import Layout from "./components/Layout";
+import About from "./components/About";
+import "/node_modules/primeflex/primeflex.css";
+import RoomLayout from "./components/RoomLayout";
+import Registration from "./components/Signup";
+import Login from "./components/Signin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="room/:id" element={<RoomLayout />} />
+        {/* <Route path="dashboard" element={<Dashboard />} /> */}
+
+        {/* Using path="*"" means "match anything", so this route
+                acts like a catch-all for URLs that we don't have explicit
+                routes for. */}
+        <Route path="*" element={<Error404 />} />
+      </Route>
+      <Route path="/signup" element={<Registration />} />
+      <Route path="/signin" element={<Login />} />
+    </Routes>
   );
 }
 
