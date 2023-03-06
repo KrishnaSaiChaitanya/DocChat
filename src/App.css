@@ -1,3 +1,15 @@
+.p-tabview-nav-container{
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+.p-dialog-titlebar-close{
+  display: none;
+}
+body{
+  height: 100vh;
+  background-color: white;
+}
 .App {
   text-align: center;
 }
