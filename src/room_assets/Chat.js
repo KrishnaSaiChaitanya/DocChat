@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Tooltip } from "primereact/tooltip";
+import { Zoom } from "react-reveal";
 
 const Chat = () => {
   const [visible, setVisible] = useState(false);
@@ -42,7 +43,7 @@ const Chat = () => {
   );
   return (
     <div style={{ height: "100%" }}>
-      <div style={{ padding: "10px" }}>
+      <div>
         <div
           className="homeroom_img"
           style={{
@@ -52,10 +53,12 @@ const Chat = () => {
             alignItems: "center",
           }}
         >
-          <img
-            src="../images/share.png"
-            style={{ height: "45vh", padding: "10px" }}
-          />
+          <Zoom duration={"1200"}>
+            <img
+              src="../images/share.png"
+              style={{ height: "45vh", padding: "10px" }}
+            />
+          </Zoom>
         </div>
         <div
           style={{

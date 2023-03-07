@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Chart } from "chart.js";
@@ -6,24 +6,73 @@ import Chat from "../room_assets/Chat";
 import Upload from "../room_assets/Upload";
 import Stats from "../room_assets/Stats";
 import Files from "../room_assets/Files";
+import Menu from "./assets/Menu";
 
 const RoomLayout = () => {
-  const id = useParams();
-  console.log(id);
+  const [id, setid] = useState({});
+  const num = useParams();
+  useEffect(() => {
+    setid(num);
+    console.log(id.id);
+  }, [num]);
+
   return (
     <div style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
-      <h1 className="text-center mt-7">Room Here .., </h1>
-      <div className="p-5">
+      <div className="grid">
+        <div className="col-12 grid mt-5 mb-5">
+          <div
+            className="col-1"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img src="../images/logo.png" height={50} />
+            </div>
+          </div>
+          <div className="col-9">
+            <h1 className="text-start ">Doc Chat</h1>
+          </div>
+          <div
+            className="col-2"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Menu />
+          </div>
+        </div>
+      </div>
+      <h2 className="text-center mt-3">Room Here .. {id.id}</h2>
+      <div
+        className="network_img"
+        style={{ position: "absolute", top: "68%", right: "0" }}
+      >
+        <img src="../images/network.jpg" height={250} />
+      </div>
+      <div className="p-3 pt-3">
         <TabView>
           <TabPanel
             className="pr-5"
             header="Files"
+            leftIcon="pi pi-file mr-2"
             headerClassName="flex align-content-between"
           >
             <Files />
           </TabPanel>
           <TabPanel
             header="Upload"
+            leftIcon="pi pi-upload mr-2"
             className="pr-5"
             headerClassName="flex align-content-between"
           >
@@ -32,6 +81,7 @@ const RoomLayout = () => {
           <TabPanel
             header="Chat"
             className="pr-5"
+            leftIcon="pi pi-comments mr-2"
             headerClassName="flex align-content-between"
           >
             <Chat />
@@ -39,6 +89,7 @@ const RoomLayout = () => {
           <TabPanel
             header="Stats"
             className="pr-5"
+            leftIcon="pi pi-chart-bar mr-2"
             headerClassName="flex align-content-between"
           >
             <Stats />

@@ -5,6 +5,7 @@ import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
 import { Tooltip } from "primereact/tooltip";
 import { Tag } from "primereact/tag";
+import { Zoom } from "react-reveal";
 
 export default function Upload() {
   const toast = useRef(null);
@@ -111,18 +112,12 @@ export default function Upload() {
   const emptyTemplate = () => {
     return (
       <div className="flex align-items-center flex-column">
-        <i
-          className="pi pi-image mt-3 p-5"
-          style={{
-            fontSize: "5em",
-            borderRadius: "50%",
-            backgroundColor: "var(--surface-b)",
-            color: "var(--surface-d)",
-          }}
-        ></i>
+        <Zoom duration={"1200"}>
+          <img src="../images/draganddrop.jpg" height={250} />
+        </Zoom>
         <span
           style={{ fontSize: "1.2em", color: "var(--text-color-secondary)" }}
-          className="my-5"
+          className="my-2"
         >
           Drag and Drop Image Here
         </span>

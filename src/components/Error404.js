@@ -1,4 +1,5 @@
 import React from "react";
+import { Zoom } from "react-reveal";
 
 const Error404 = () => {
   return (
@@ -16,7 +17,9 @@ const Error404 = () => {
           alignItems: "center",
         }}
       >
-        <img src="./images/error.jpg" style={{ height: "80vh" }} />
+        <Zoom duration={"1200"}>
+          <img src="./images/error.jpg" style={{ height: "80vh" }} />
+        </Zoom>
       </div>
     </div>
   );

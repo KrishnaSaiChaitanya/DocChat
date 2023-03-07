@@ -6,6 +6,11 @@
 .p-dialog-titlebar-close{
   display: none;
 }
+@media(max-width: 1200px){
+.network_img {
+  display: none;
+}  
+}
 body{
   height: 100vh;
   background-color: white;

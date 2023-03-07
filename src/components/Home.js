@@ -1,5 +1,6 @@
 import { Button } from "primereact/button";
 import React from "react";
+import { Zoom } from "react-reveal";
 import { io } from "socket.io-client";
 import Login from "./Signin";
 const Home = () => {
@@ -18,10 +19,12 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-        <img
-          src="./images/room.jpg"
-          style={{ height: "70vh", padding: "30px" }}
-        />
+        <Zoom duration={"1200"} delay={600}>
+          <img
+            src="./images/room.jpg"
+            style={{ height: "70vh", padding: "30px" }}
+          />
+        </Zoom>
       </div>
       <div
         style={{
