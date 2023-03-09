@@ -24,32 +24,32 @@ const Files = () => {
             <Search />
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={1000} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={1000} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={1000} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={1000} delay={1000}>
+            <Zoom bottom duration={900} delay={600}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>

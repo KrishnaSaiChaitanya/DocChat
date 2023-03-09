@@ -65,8 +65,7 @@ export default function Upload() {
         }}
       >
         {chooseButton}
-        {uploadButton}
-        {cancelButton}
+
         <div className="flex align-items-center gap-3 ml-auto">
           <span>{formatedValue} / 1 MB</span>
           <ProgressBar
@@ -113,7 +112,7 @@ export default function Upload() {
     return (
       <div className="flex align-items-center flex-column">
         <Zoom duration={"1200"}>
-          <img src="../images/draganddrop.jpg" height={200} />
+          <img src="../images/draganddrop.jpg" height={160} />
         </Zoom>
         <span
           style={{ fontSize: "1.2em", color: "var(--text-color-secondary)" }}
@@ -151,31 +150,59 @@ export default function Upload() {
         justifyContent: "center",
       }}
     >
-      <Toast ref={toast}></Toast>
+      <div>
+        <Toast ref={toast}></Toast>
 
-      <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-      <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-      <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+        <Tooltip
+          target=".custom-choose-btn"
+          content="Choose"
+          position="bottom"
+        />
+        <Tooltip
+          target=".custom-upload-btn"
+          content="Upload"
+          position="bottom"
+        />
+        <Tooltip
+          target=".custom-cancel-btn"
+          content="Clear"
+          position="bottom"
+        />
 
-      <FileUpload
-        style={{ width: "55vw" }}
-        ref={fileUploadRef}
-        name="demo[]"
-        url="/api/upload"
-        multiple
-        accept="image/*"
-        maxFileSize={1000000}
-        onUpload={onTemplateUpload}
-        onSelect={onTemplateSelect}
-        onError={onTemplateClear}
-        onClear={onTemplateClear}
-        headerTemplate={headerTemplate}
-        itemTemplate={itemTemplate}
-        emptyTemplate={emptyTemplate}
-        chooseOptions={chooseOptions}
-        uploadOptions={uploadOptions}
-        cancelOptions={cancelOptions}
-      />
+        <FileUpload
+          style={{ width: "55vw" }}
+          ref={fileUploadRef}
+          name="demo[]"
+          url="/api/upload"
+          multiple
+          accept="image/*"
+          maxFileSize={1000000}
+          onUpload={onTemplateUpload}
+          onSelect={onTemplateSelect}
+          onError={onTemplateClear}
+          onClear={onTemplateClear}
+          headerTemplate={headerTemplate}
+          itemTemplate={itemTemplate}
+          emptyTemplate={emptyTemplate}
+          chooseOptions={chooseOptions}
+          uploadOptions={uploadOptions}
+          cancelOptions={cancelOptions}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "20px",
+          }}
+        >
+          <Button
+            label="Upload Files"
+            icon="pi pi-bolt"
+            className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
+          />
+        </div>
+      </div>
     </div>
   );
 }

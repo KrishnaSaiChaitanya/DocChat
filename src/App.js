@@ -16,11 +16,13 @@ import RoomLayout from "./components/RoomLayout";
 import Registration from "./components/Signup";
 import Login from "./components/Signin";
 import { useFavicon } from "primereact/hooks";
+import Hero from "./components/Hero";
 
 function App() {
   useFavicon("./images/fav.");
   return (
     <Routes>
+      <Route path="/hero" element={<Hero />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />

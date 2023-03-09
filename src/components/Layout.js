@@ -56,27 +56,27 @@ function Layout() {
           <div class=" col-12 grid m-8 mt-3 pt-3 pb-8">
             <div class="col-12">
               <Link to="/" style={{ textDecoration: "none" }}>
-                <Button label="Home" outlined />
+                <Button label="Home" outlined rounded />
               </Link>
             </div>
             <div class="col-12">
               <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
-                <Button label="Room 1" outlined />
+                <Button label="Room 1" outlined rounded />
               </Link>
             </div>
             <div class="col-12">
               <Link to="/about" style={{ textDecoration: "none" }}>
-                <Button label="Room 2" outlined />
+                <Button label="Room 2" outlined rounded />
               </Link>
             </div>
             <div class="col-12">
               <Link to="/room/647bjd" style={{ textDecoration: "none" }}>
-                <Button label="Room 3" outlined />
+                <Button label="Room 3" outlined rounded />
               </Link>
             </div>
             <div class="col-12">
               <Link to="/ro" style={{ textDecoration: "none" }}>
-                <Button label="Room 4" outlined />
+                <Button label="Room 4" outlined rounded />
               </Link>
             </div>
             <div className="col-12 pt-3">
