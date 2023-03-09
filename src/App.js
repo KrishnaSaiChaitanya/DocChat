@@ -15,8 +15,10 @@ import "/node_modules/primeflex/primeflex.css";
 import RoomLayout from "./components/RoomLayout";
 import Registration from "./components/Signup";
 import Login from "./components/Signin";
+import { useFavicon } from "primereact/hooks";
 
 function App() {
+  useFavicon("./images/fav.");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

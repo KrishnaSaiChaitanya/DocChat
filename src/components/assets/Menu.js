@@ -51,10 +51,11 @@ export default function Menu() {
       <SpeedDial
         model={items}
         radius={120}
-        type="quarter-circle"
-        direction="down-left"
+        type="semi-circle"
+        direction="left"
         showIcon="pi pi-bars"
         hideIcon="pi pi-times"
+        buttonClassName="p-button"
       />
     </div>
   );

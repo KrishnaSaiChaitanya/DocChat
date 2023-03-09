@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 // import swal from "sweetalert";
-
+import { Zoom } from "react-reveal";
 import { Button } from "primereact/button";
 
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 import "./auth.css";
 
 export default function Login() {
@@ -60,62 +60,70 @@ export default function Login() {
             justifyContent: "center",
           }}
         >
-          <img src="./images/logo.png" alt="hyper" height={90} className="" />
+          <Zoom duration={"1200"}>
+            <img src="./images/logo.png" alt="hyper" height={90} className="" />
+          </Zoom>
         </div>
-        <form
-          method="post"
-          // onSubmit={handleSubmit}
-          className="sign-in-form"
-          style={{ height: "70vh" }}
-        >
-          <h2 className="title">Sign in</h2>
-          <div className="input-field">
-            <i className="fas fa-user"></i>
-            <input
-              type="text"
-              placeholder="Username"
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </div>
-          <div className="input-field">
-            <i className="fas fa-lock"></i>
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-          <br />
-          <Button
-            label="Sign In"
-            className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
-          />
-
-          <p className="social-text">Or{""}</p>
-          {/* <a href="http://localhost:3000/signup">
+        <Zoom duration={"1200"} delay={600}>
+          <form
+            method="post"
+            // onSubmit={handleSubmit}
+            className="sign-in-form"
+            style={{ height: "70vh" }}
+          >
+            <h2 className="title">Sign in</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
+              <input
+                type="text"
+                placeholder="Username"
+                onChange={({ target }) => setUsername(target.value)}
+              />
+            </div>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </div>
+            <br />
+            <Link
+              to={"/"}
+              className="font-medium no-underline ml-2 mb-3 text-blue-500 cursor-pointer"
+            >
+              <Button
+                label="Sign In"
+                className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
+              />
+            </Link>
+            <p className="social-text">Or{""}</p>
+            {/* <a href="http://localhost:3000/signup">
           <p style={{ color: "black", textDecoration: "none" }}></p>
         </a> */}
-          <a
-            href="http://localhost:3000/signup"
-            className="font-medium no-underline ml-2 mb-3 text-blue-500 cursor-pointer"
-          >
-            Sign Up
-          </a>
-          <div className="social-media">
-            <a href="#" className="social-icon">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </form>
+            <Link
+              to={"/signup"}
+              className="font-medium no-underline ml-2 mb-3 text-blue-500 cursor-pointer"
+            >
+              Sign Up
+            </Link>
+            <div className="social-media">
+              <a href="#" className="social-icon">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
+        </Zoom>
       </div>
     </>
   );

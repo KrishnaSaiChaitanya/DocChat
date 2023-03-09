@@ -113,7 +113,7 @@ export default function Upload() {
     return (
       <div className="flex align-items-center flex-column">
         <Zoom duration={"1200"}>
-          <img src="../images/draganddrop.jpg" height={250} />
+          <img src="../images/draganddrop.jpg" height={200} />
         </Zoom>
         <span
           style={{ fontSize: "1.2em", color: "var(--text-color-secondary)" }}
@@ -144,7 +144,13 @@ export default function Upload() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Toast ref={toast}></Toast>
 
       <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
@@ -152,6 +158,7 @@ export default function Upload() {
       <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
       <FileUpload
+        style={{ width: "55vw" }}
         ref={fileUploadRef}
         name="demo[]"
         url="/api/upload"

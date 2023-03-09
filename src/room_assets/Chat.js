@@ -8,7 +8,36 @@ import { Zoom } from "react-reveal";
 const Chat = () => {
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState("");
-  const header = <h2 className="text-center">Chat Room ...</h2>;
+  const header = (
+    <div className="grid">
+      <div className="col-2">
+        {/* <Tooltip
+          target=".custom-tooltip-btn"
+          tooltipOptions={{ position: "bottom" }}
+        >
+          <img
+            alt="logo"
+            src="https://primefaces.org/cdn/primereact/images/logo.png"
+            data-pr-tooltip="PrimeReact-Logo"
+            height="80px"
+          />
+        </Tooltip> */}
+
+        <Button
+          className="custom-tooltip-btn"
+          type="button"
+          tooltip="Current viewers"
+          text
+          size="lg"
+          icon="pi pi-eye"
+          tooltipOptions={{ position: "bottom" }}
+        />
+      </div>
+      <div className="col-10">
+        <h2 className="text-center">Chat Room ...</h2>
+      </div>
+    </div>
+  );
   const footerContent = (
     <div className="grid">
       <div className="col-8">
