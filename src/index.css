@@ -6,8 +6,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
+}
+.p-tabview-nav-content{
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 40px;
+  padding-top: 15px;
+  padding-bottom: 0;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

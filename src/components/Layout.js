@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
 import { Link, Outlet } from "react-router-dom";
 import { Zoom, Fade } from "react-reveal";
+import Menu from "./assets/Menu";
 
 function Layout() {
   return (
@@ -13,17 +14,46 @@ function Layout() {
         alignItems: "center",
       }}
     >
+      <div style={{ position: "absolute", top: "44%", left: "21.5%" }}>
+        <Menu />
+      </div>
       <Fade left duration={"1000"}>
         <div
-          className="lg:col-3 md:col-4 border-circle border-noround-left"
+          className="grid lg:col-3 md:col-4 "
           style={{
             backgroundColor: "#989eaa",
-            height: "90vh",
+            height: "100vh",
             display: "flex",
             alignItems: "center",
           }}
         >
-          <div class="grid m-8 pt-8 pb-8">
+          <div className="col-12 grid mt-6">
+            <div
+              className="col-4"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "end",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img src="../images/logo.png" height={50} />
+              </div>
+            </div>
+            <div className="col-8">
+              <h1 className="text-start ">Doc Chat</h1>
+            </div>
+            {/* <div className="col-2">
+              <Menu />
+            </div> */}
+          </div>
+          <div class=" col-12 grid m-8 mt-3 pt-3 pb-8">
             <div class="col-12">
               <Link to="/" style={{ textDecoration: "none" }}>
                 <Button label="Home" outlined />

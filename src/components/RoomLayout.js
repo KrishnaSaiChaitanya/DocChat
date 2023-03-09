@@ -20,7 +20,7 @@ const RoomLayout = () => {
     <div style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
       <div className="grid">
         <div className="col-12 grid mt-5 mb-5">
-          <div
+          {/* <div
             className="col-1"
             style={{
               display: "flex",
@@ -41,16 +41,9 @@ const RoomLayout = () => {
           <div className="col-9">
             <h1 className="text-start ">Doc Chat</h1>
           </div>
-          <div
-            className="col-2"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <div className="col-2">
             <Menu />
-          </div>
+          </div> */}
         </div>
       </div>
       <h2 className="text-center mt-3">Room Here .. {id.id}</h2>
@@ -61,9 +54,9 @@ const RoomLayout = () => {
         <img src="../images/network.jpg" height={250} />
       </div>
       <div className="p-3 pt-3">
-        <TabView>
+        <TabView style={{ height: "100%" }}>
           <TabPanel
-            className="pr-5"
+            className="pr-8 pl-4"
             header="Files"
             leftIcon="pi pi-file mr-2"
             headerClassName="flex align-content-between"
@@ -73,14 +66,14 @@ const RoomLayout = () => {
           <TabPanel
             header="Upload"
             leftIcon="pi pi-upload mr-2"
-            className="pr-5"
+            className="pr-8"
             headerClassName="flex align-content-between"
           >
             <Upload />
           </TabPanel>
           <TabPanel
             header="Chat"
-            className="pr-5"
+            className="pr-8"
             leftIcon="pi pi-comments mr-2"
             headerClassName="flex align-content-between"
           >
@@ -88,7 +81,7 @@ const RoomLayout = () => {
           </TabPanel>
           <TabPanel
             header="Stats"
-            className="pr-5"
+            className="pr-6"
             leftIcon="pi pi-chart-bar mr-2"
             headerClassName="flex align-content-between"
           >
