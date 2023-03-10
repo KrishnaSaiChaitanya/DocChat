@@ -18,8 +18,8 @@ const RoomLayout = () => {
 
   return (
     <div style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
-      <div className="grid">
-        <div className="col-12 grid mt-5 mb-5">
+      <div className="grid grid-nogutter">
+        <div className="col-12 grid grid-nogutter mt-5 mb-5">
           {/* <div
             className="col-1"
             style={{
@@ -49,12 +49,12 @@ const RoomLayout = () => {
       <h2 className="text-center mt-3">Room Here .. {id.id}</h2>
       <div
         className="network_img"
-        style={{ position: "absolute", top: "68%", right: "0" }}
+        style={{ position: "absolute", bottom: "0", right: "0" }}
       >
         <img src="../images/network.jpg" height={250} />
       </div>
-      <div className="p-3 pt-3">
-        <TabView style={{ height: "100%" }}>
+      <div className=" pt-3">
+        <TabView>
           <TabPanel
             className="pr-8 pl-4"
             header="Files"

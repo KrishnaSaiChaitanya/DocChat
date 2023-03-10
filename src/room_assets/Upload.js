@@ -193,7 +193,7 @@ export default function Upload() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: "20px",
+            padding: "10px",
           }}
         >
           <Button

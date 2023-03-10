@@ -9,9 +9,9 @@ const Files = () => {
   const [visible, setVisible] = useState(false);
   const header = <h2 className="text-center">File splliter</h2>;
   return (
-    <div>
-      <div class="grid">
-        <div className="col-9 grid">
+    <div style={{ width: "100%" }}>
+      <div class="grid grid-nogutter">
+        <div className="col-12 md:col-9 grid grid-nogutter">
           <div
             className="col-12"
             style={{
@@ -24,41 +24,39 @@ const Files = () => {
             <Search />
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottom duration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottomduration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottomduration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottom duration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottomduration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
-            <Zoom bottom duration={900} delay={600}>
+            <Zoom bottomduration={1100}>
               <img src="../images/folder.jpg" height={120} />
             </Zoom>
           </div>
         </div>
         <div
-          className="col-3"
+          className="col-12 md:col-3 p-3"
           style={{
-            padding: "10px",
-
             display: "flex",
             alignItems: "center",
           }}

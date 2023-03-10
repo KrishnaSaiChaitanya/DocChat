@@ -11,10 +11,7 @@
   display: none;
 }  
 }
-body{
-  height: 100vh;
-  background-color: white;
-}
+
 .App {
   text-align: center;
 }

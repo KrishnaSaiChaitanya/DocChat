@@ -19,7 +19,7 @@ import { useFavicon } from "primereact/hooks";
 import Hero from "./components/Hero";
 
 function App() {
-  useFavicon("./images/fav.");
+  useFavicon("../images/logo.svg");
   return (
     <Routes>
       <Route path="/hero" element={<Hero />} />

@@ -9,7 +9,7 @@ const Chat = () => {
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState("");
   const header = (
-    <div className="grid">
+    <div className="grid grid-nogutter grid grid-nogutter-nogutter">
       <div className="col-2">
         {/* <Tooltip
           target=".custom-tooltip-btn"
@@ -39,7 +39,7 @@ const Chat = () => {
     </div>
   );
   const footerContent = (
-    <div className="grid">
+    <div className="grid grid-nogutter">
       <div className="col-8">
         <InputTextarea
           style={{ width: "50vw" }}
@@ -111,7 +111,7 @@ const Chat = () => {
             <div
               className="homeroom_img"
               style={{
-                height: "45vh",
+                height: "45%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
