@@ -17,6 +17,9 @@ import Registration from "./components/Signup";
 import Login from "./components/Signin";
 import { useFavicon } from "primereact/hooks";
 import Hero from "./components/Hero";
+import Profile from "./components/Profile";
+import Favorates from "./components/Favorates";
+import CreateRoom from "./room_assets/CreateRoom";
 
 function App() {
   useFavicon("../images/logo.svg");
@@ -25,6 +28,12 @@ function App() {
       <Route path="/hero" element={<Hero />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="Profile" element={<Profile />}>
+          <Route path="fav" element={<Favorates />}>
+            <Route path="*" element={<Favorates />} />
+          </Route>
+        </Route>
+        <Route path="createroom" element={<CreateRoom />} />
         <Route path="about" element={<About />} />
         <Route path="room/:id" element={<RoomLayout />} />
         {/* <Route path="dashboard" element={<Dashboard />} /> */}

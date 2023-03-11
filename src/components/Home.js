@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
 import React from "react";
 import { Zoom } from "react-reveal";
+import { Link } from "react-router-dom";
 import { io } from "socket.io-client";
 import Login from "./Signin";
 const Home = () => {
@@ -33,11 +34,13 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-        <Button
-          label="Create Room"
-          icon="pi pi-bolt"
-          className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
-        />
+        <Link to="/createroom" style={{ textDecoration: "none" }}>
+          <Button
+            label="Create Room"
+            icon="pi pi-bolt"
+            className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
+          />
+        </Link>
       </div>
       <h2 className="text-center pt-3 pb-3">or</h2>
       <div

@@ -9,7 +9,7 @@ export default function Menu() {
   const items = [
     {
       label: "Add",
-      icon: "pi pi-pencil",
+      icon: "pi pi-sign-in",
       command: () => {
         navigate("/signup");
       },
@@ -26,21 +26,17 @@ export default function Menu() {
       },
     },
     {
-      label: "Delete",
-      icon: "pi pi-trash",
+      label: "home",
+      icon: "pi pi-home",
       command: () => {
-        toast.current.show({
-          severity: "error",
-          summary: "Delete",
-          detail: "Data Deleted",
-        });
+        navigate("/");
       },
     },
     {
-      label: "React Website",
-      icon: "pi pi-external-link",
+      label: "Fav",
+      icon: "pi pi-star",
       command: () => {
-        window.location.href = "https://facebook.github.io/react/";
+        navigate("/profile/fav");
       },
     },
   ];

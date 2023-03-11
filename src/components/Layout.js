@@ -36,7 +36,7 @@ function Layout() {
                   <img src="../images/logo.png" height={50} />
                 </div>
               </div>
-              <div className="col-8 pl-2">
+              <div className="col-8 pl-3">
                 <h1 className="text-start ">Doc Chat</h1>
               </div>
             </div>
@@ -49,14 +49,16 @@ function Layout() {
                 paddingRight: "40px",
               }}
             >
-              <Button
-                size="lg"
-                icon="pi pi-user"
-                rounded
-                outlined
-                severity="info"
-                aria-label="User"
-              />
+              <Link to="/profile" style={{ textDecoration: "none" }}>
+                <Button
+                  size="lg"
+                  icon="pi pi-user"
+                  rounded
+                  outlined
+                  severity="info"
+                  aria-label="User"
+                />
+              </Link>
             </div>
             <div
               className="col-12"
