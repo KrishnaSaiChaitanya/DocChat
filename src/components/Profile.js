@@ -1,13 +1,127 @@
-import React from "react";
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
+import { Tooltip } from "primereact/tooltip";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import Favorates from "./Favorates";
 
-const Profile = () => {
+const Profile = (props) => {
+  const [Fav, setFav] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [value, setvalue] = useState("");
+  const [visible, setVisible] = useState(false);
+  const add_element = (item) => {
+    const new_fav = [...Fav, item];
+    setFav(new_fav);
+    localStorage.setItem("fav", JSON.stringify(new_fav));
+  };
+  useEffect(() => {
+    setFav(JSON.parse(localStorage.getItem("fav")) || []);
+  }, []);
+
   return (
     <>
       <div>
         <h1 className="text-center p-5">Profile</h1>
+        <div className="justify-content-center align-items-center flex">
+          <div>
+            <Button
+              label="Add new Folder"
+              text
+              icon="pi pi-folder"
+              raised
+              rounded
+              onClick={() => setVisible(true)}
+            />
+            <Button
+              className="custom-tooltip-btn ml-3"
+              size="lg"
+              tooltipOptions={{ position: "top" }}
+              icon="pi pi-bookmark"
+              rounded
+              outlined
+              severity="info"
+              aria-label="User"
+            />
+            <Tooltip
+              target=".custom-tooltip-btn"
+              position="bottom"
+              autoHide={false}
+              event="focus"
+            >
+              <div className="flex justify-content-center align-items-center p-5">
+                <Dropdown
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.value)}
+                  options={Fav}
+                  optionLabel="name"
+                  editable
+                  placeholder="Select a City"
+                  className="w-full md:w-14rem mr-3"
+                />
+                <div>
+                  <Button
+                    size="lg"
+                    icon="pi pi-plus"
+                    rounded
+                    outlined
+                    severity="info"
+                    aria-label="User"
+                    onClick={() => {
+                      const fin = Fav.findIndex(
+                        (obj) => obj.name == selectedCity.name
+                      );
+
+                      const arr = [...Fav];
+                      arr[fin].inner.push({ name: "hello" });
+                      console.log(arr);
+                      setFav(arr);
+                      localStorage.setItem("fav", JSON.stringify(arr));
+                    }}
+                  />
+                </div>
+              </div>
+            </Tooltip>
+
+            <Dialog visible={visible} onHide={() => setVisible(false)}>
+              <div className="m-4 p-5">
+                <label
+                  htmlFor="password"
+                  className="block text-900 font-medium mb-2"
+                >
+                  Name
+                </label>
+                <InputText
+                  id="text"
+                  placeholder="Enter Name of your Folder"
+                  className="w-20rem mb-3"
+                  onChange={(e) => {
+                    setvalue(e.target.value);
+                    console.log(value);
+                  }}
+                />
+                <div className="justify-content-center align-items-center flex">
+                  <Button
+                    label="Add Folder"
+                    text
+                    rounded
+                    onClick={() => {
+                      add_element({
+                        name: value,
+                        inner: [{ name: "yahoo" }],
+                      });
+                      setVisible(false);
+                    }}
+                  />
+                </div>
+              </div>
+            </Dialog>
+          </div>
+        </div>
       </div>
-      <Outlet />
+      <Favorates data={Fav} />
     </>
   );
 };
