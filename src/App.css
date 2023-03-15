@@ -10,6 +10,16 @@
 .network_img {
   display: none;
 }  
+#temp_img{
+  height: 80px;
+}
+#menu{
+  display: none;
+}
+#home_img{
+  padding-top: 30px;
+  height: 400px !important
+}
 }
 
 .App {

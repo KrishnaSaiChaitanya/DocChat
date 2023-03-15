@@ -1,49 +1,50 @@
 // import { useRouter } from "next/router";
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Zoom } from "react-reveal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./auth.css";
 
 export default function Registration() {
+  const navigate = useNavigate();
   // let router = useRouter();
   let [loading, setLoading] = useState(false);
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [email, setEmail] = useState("");
 
-  // async function handleSubmit(e) {
-  //   setLoading(true);
-  //   e.preventDefault();
-  //   let res = await fetch("/api/auth/signup", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       username,
-  //       email,
-  //       password,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   let data = await res.json();
-  //   console.log({ data });
-  //   if (data.ok) {
-  //     swal({
-  //       text: "Successfully Signed up",
-  //       icon: "success",
-  //     });
-  //     router.push("/login");
-  //   } else {
-  //     swal({
-  //       text: "Error",
-  //       icon: "error",
-  //       timer: 2000,
-  //       buttons: false,
-  //     });
-  //   }
-  //   setLoading(false);
-  // }
+  useEffect(() => {
+    console.log("helo");
+  }, []);
+
+  async function handleSubmit(e) {
+    console.log(loading, username, password, email);
+    setLoading(true);
+    e.preventDefault();
+    let res = await fetch(
+      "https://docchat-backend.onrender.com/api/auth/register",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: username,
+          email: email,
+          password: password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let data = await res.json();
+    console.log({ data });
+    if (data) {
+      console.log("sucuss");
+      navigate("/signin");
+    } else {
+      console.log("error ocurred");
+    }
+    setLoading(false);
+  }
   return (
     <div className="sign_up_back">
       <div className="text-center pt-7">
@@ -89,8 +90,9 @@ export default function Registration() {
             className="font-medium no-underline ml-2 mb-3 text-blue-500 cursor-pointer"
           >
             <Button
-              label="Sign In"
+              label="Sign Up"
               className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
+              onClick={handleSubmit}
             />
           </Link>
           <p className="social-text">Or{""}</p>

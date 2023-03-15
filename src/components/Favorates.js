@@ -27,17 +27,20 @@ const Favorates = (props) => {
     <>
       <div className="grid grid-nogutter p-4">
         <div className="col-1">
-          <Button
-            size="lg"
-            icon="pi pi-arrow-left"
-            rounded
-            outlined
-            severity="info"
-            aria-label="User"
-            onClick={() => {
-              setind(null);
-            }}
-          />
+          {ind && (
+            <Button
+              id="menu"
+              size="lg"
+              icon="pi pi-arrow-left"
+              rounded
+              outlined
+              severity="info"
+              aria-label="User"
+              onClick={() => {
+                setind(null);
+              }}
+            />
+          )}
         </div>
         <div className="col-11 grid grid-nogutter">
           {!ind
@@ -49,6 +52,7 @@ const Favorates = (props) => {
                   <div className="col-12 justify-content-center flex">
                     <Zoom duration={1100} delay={600}>
                       <img
+                        id="temp_img"
                         src="../images/folder.jpg"
                         height={120}
                         onClick={() => {
@@ -73,8 +77,9 @@ const Favorates = (props) => {
                   <div className="col-12 justify-content-center flex">
                     <Zoom duration={1100} delay={600}>
                       <img
+                        id="temp_img"
                         src="../images/file.jpg"
-                        style={{ height: "8rem" }}
+                        height={120}
                       />
                     </Zoom>
                   </div>

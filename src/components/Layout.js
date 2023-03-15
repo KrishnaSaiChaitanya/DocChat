@@ -46,11 +46,11 @@ function Layout() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingRight: "40px",
               }}
             >
               <Link to="/profile" style={{ textDecoration: "none" }}>
                 <Button
+                  className="justify-content-center align-items-center flex"
                   size="lg"
                   icon="pi pi-user"
                   rounded
@@ -72,33 +72,33 @@ function Layout() {
                 width: "100%",
               }}
             >
-              <div>
-                <div className="p-1">
+              <div className="">
+                <div className="p-1 justify-content-center align-items-center flex">
                   <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
                     <Button label="Room 1" outlined rounded />
                   </Link>
                 </div>
-                <div className="p-1">
+                <div className="p-1 justify-content-center align-items-center flex">
                   <Link to="/about" style={{ textDecoration: "none" }}>
                     <Button label="Room 2" outlined rounded />
                   </Link>
                 </div>
-                <div className="p-1">
+                <div className="p-1 justify-content-center align-items-center flex">
                   <Link to="/room/647bjd" style={{ textDecoration: "none" }}>
                     <Button label="Room 3" outlined rounded />
                   </Link>
                 </div>
-                <div className="p-1">
+                <div className="p-1 justify-content-center align-items-center flex">
                   <Link to="/ro" style={{ textDecoration: "none" }}>
                     <Button label="Room 4" outlined rounded />
                   </Link>
-                  <div className="p-1">
+                  <div className="p-1 justify-content-center align-items-center flex">
                     <Link to="/room/bjcjsg" style={{ textDecoration: "none" }}>
                       <Button label="Room 5" outlined rounded />
                     </Link>
                   </div>
                 </div>
-                <div className="col-12 pt-3">
+                <div className="col-12 pt-3 justify-content-center align-items-center flex">
                   <Button label="view more ..." text />
                 </div>
               </div>
@@ -106,6 +106,7 @@ function Layout() {
           </div>
         </Fade>
         <div
+          id="menu"
           className="col-0.5"
           style={{
             display: "flex",

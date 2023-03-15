@@ -42,7 +42,7 @@ export default function Menu() {
   ];
 
   return (
-    <div>
+    <div id="menu">
       <Toast ref={toast} />
       <SpeedDial
         model={items}

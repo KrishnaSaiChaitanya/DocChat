@@ -3,15 +3,11 @@ import { useEffect, useState } from "react";
 import { Zoom } from "react-reveal";
 import { Button } from "primereact/button";
 
-import { Link, useRouteError } from "react-router-dom";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 import "./auth.css";
 
 export default function Login() {
-  // let session = useSession();
-
-  // console.log({ session });
-
-  // const router = useRouteError();
+  const navigate = useNavigate();
   let [name, setName] = useState("");
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
@@ -23,32 +19,34 @@ export default function Login() {
   //   }
   // }, [session]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   let res = await signIn("credentials", {
-  //     redirect: false,
-  //     username: username,
-  //     password: password,
-  //     callbackUrl: "/",
-  //   });
-  //   console.log({ res });
-  //   if (res.ok) {
-  //     swal({
-  //       text: "Successfully Logged in",
-  //       icon: "success",
-  //       buttons: false,
-  //       timer: 2000,
-  //     });
-  //     // router.push(res.url);
-  //   } else {
-  //     swal({
-  //       text: "Wrong Credentials",
-  //       icon: "error",
-  //       buttons: false,
-  //       timer: 2000,
-  //     });
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(username, password);
+    e.preventDefault();
+    let res = await fetch(
+      "https://docchat-backend.onrender.com/api/auth/login",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: username,
+          password: password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let data = await res.json();
+    console.log({ data });
+    if (res.status == 200) {
+      console.log("Sucuss");
+      localStorage.setItem("token", JSON.stringify(data.token.token));
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/");
+    } else {
+      console.log("errorr");
+    }
+  };
   return (
     <>
       <div>
@@ -96,6 +94,7 @@ export default function Login() {
               <Button
                 label="Sign In"
                 className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
+                onClick={handleSubmit}
               />
             </Link>
             <p className="social-text">Or{""}</p>

@@ -25,32 +25,32 @@ const Files = () => {
           </div>
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>
           <div class="col-4 p-3 ">
             <Zoom duration={1100} delay={600}>
-              <img src="../images/folder.jpg" height={120} />
+              <img src="../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>
         </div>

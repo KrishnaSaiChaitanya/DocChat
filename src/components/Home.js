@@ -1,10 +1,16 @@
 import { Button } from "primereact/button";
-import React from "react";
+import React, { useEffect } from "react";
 import { Zoom } from "react-reveal";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import Login from "./Signin";
 const Home = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/signin");
+    }
+  }, []);
   // const socket = io("http://localhost:3001");
   // socket.on("connect", () => {
   //   console.log("Connected to WebSocket server");
@@ -12,6 +18,7 @@ const Home = () => {
   return (
     <div>
       <div
+        id="home_img"
         className="homeroom_img"
         style={{
           height: "70vh",
@@ -22,6 +29,7 @@ const Home = () => {
       >
         <Zoom duration={"1200"} delay={600}>
           <img
+            id="home_img"
             src="./images/room.jpg"
             style={{ height: "70vh", padding: "30px" }}
           />
