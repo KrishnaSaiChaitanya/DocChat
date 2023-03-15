@@ -47,6 +47,7 @@ export default function Splliter() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+
             padding: "20px",
           }}
         >

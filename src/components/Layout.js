@@ -92,12 +92,13 @@ function Layout() {
                   <Link to="/ro" style={{ textDecoration: "none" }}>
                     <Button label="Room 4" outlined rounded />
                   </Link>
-                  <div className="p-1 justify-content-center align-items-center flex">
-                    <Link to="/room/bjcjsg" style={{ textDecoration: "none" }}>
-                      <Button label="Room 5" outlined rounded />
-                    </Link>
-                  </div>
                 </div>
+                <div className="p-1 justify-content-center align-items-center flex">
+                  <Link to="/room/bjcjsg" style={{ textDecoration: "none" }}>
+                    <Button label="Room 5" outlined rounded />
+                  </Link>
+                </div>
+
                 <div className="col-12 pt-3 justify-content-center align-items-center flex">
                   <Button label="view more ..." text />
                 </div>

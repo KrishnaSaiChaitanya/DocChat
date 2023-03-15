@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <div
-        id="home_img"
+        id="home_"
         className="homeroom_img"
         style={{
           height: "70vh",

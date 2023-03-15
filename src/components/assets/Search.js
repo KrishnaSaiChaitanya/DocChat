@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
 
 export default function Search() {
   const [Visible, setVisible] = useState(false);
@@ -48,7 +49,15 @@ export default function Search() {
 
   return (
     <>
-      <AutoComplete
+      <span className="p-input-icon-left">
+        <i className="pi pi-search" />
+        <InputText
+          style={{ borderRadius: "30px" }}
+          onFocus={() => setVisible(true)}
+          placeholder="Search"
+        />
+      </span>
+      {/* <AutoComplete
         value={selectedItem}
         suggestions={filteredItems}
         completeMethod={searchItems}
@@ -57,7 +66,7 @@ export default function Search() {
         dropdown
         onChange={(e) => setSelectedItem(e.value)}
         onFocus={() => setVisible(true)}
-      />
+      /> */}
       <Dialog
         header={header}
         visible={Visible}

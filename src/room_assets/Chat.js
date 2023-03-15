@@ -84,6 +84,7 @@ const Chat = () => {
         >
           <Zoom duration={"1200"}>
             <img
+              id="chat_img"
               src="../images/share.png"
               style={{ height: "45vh", padding: "10px" }}
             />
@@ -118,8 +119,9 @@ const Chat = () => {
               }}
             >
               <img
+                id="home_img"
                 src="../images/loading_animation.gif"
-                style={{ height: "50vh", padding: "10px" }}
+                height={300}
               />
               <h3 className="text-center">Loading .....</h3>
             </div>

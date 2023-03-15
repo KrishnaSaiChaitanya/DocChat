@@ -4,6 +4,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Tooltip } from "primereact/tooltip";
 import React, { useEffect, useState } from "react";
+import { Zoom } from "react-reveal";
 import { Outlet } from "react-router-dom";
 import Favorates from "./Favorates";
 
@@ -13,6 +14,8 @@ const Profile = (props) => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [value, setvalue] = useState("");
   const [visible, setVisible] = useState(false);
+  const [userDetails, setuserDetails] = useState([]);
+  const [img_indx, setimg_indx] = useState(1);
   const add_element = (item) => {
     const new_fav = [...Fav, item];
     setFav(new_fav);
@@ -20,6 +23,7 @@ const Profile = (props) => {
   };
   useEffect(() => {
     setFav(JSON.parse(localStorage.getItem("fav")) || []);
+    setuserDetails(JSON.parse(localStorage.getItem("user")));
   }, []);
 
   return (
@@ -29,8 +33,35 @@ const Profile = (props) => {
         {!show_Fav && (
           <div className="">
             <div className="justify-content-center align-items-center flex p-2 pt-0">
-              <img src="../images/user.jpg" height={220} />
+              <Button
+                text
+                icon="pi pi-angle-left"
+                rounded
+                size="lg"
+                onClick={() => {
+                  setimg_indx((pre) => ((pre + 1) % 6) + 1);
+                  console.log(img_indx);
+                }}
+              />
+              <Zoom duration={"1200"}>
+                <img
+                  src={`../images/user${img_indx}.jpg`}
+                  height={220}
+                  className="m-2"
+                />
+              </Zoom>
+              <Button
+                text
+                size="lg"
+                icon="pi pi-angle-right"
+                rounded
+                onClick={() => {
+                  setimg_indx((pre) => ((pre + 1) % 6) + 1);
+                  console.log(img_indx);
+                }}
+              />
             </div>
+            <h3 className="text-center p-2">{userDetails.name}</h3>
             <div className="justify-content-center align-items-center flex">
               <Button
                 label="view Fav"

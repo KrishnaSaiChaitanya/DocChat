@@ -20,6 +20,13 @@
   padding-top: 30px;
   height: 400px !important
 }
+#chat_img{
+  height: 300px !important;
+}
+#home_ {
+  display: flex;
+  justify-content: center;
+}
 }
 
 .App {

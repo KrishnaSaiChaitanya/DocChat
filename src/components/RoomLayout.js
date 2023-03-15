@@ -56,7 +56,7 @@ const RoomLayout = () => {
       <div className=" pt-3">
         <TabView>
           <TabPanel
-            className="pr-8 pl-4"
+            className=""
             header="Files"
             leftIcon="pi pi-file mr-2"
             headerClassName="flex align-content-between"
@@ -66,14 +66,14 @@ const RoomLayout = () => {
           <TabPanel
             header="Upload"
             leftIcon="pi pi-upload mr-2"
-            className="pr-8"
+            className=""
             headerClassName="flex align-content-between"
           >
             <Upload />
           </TabPanel>
           <TabPanel
             header="Chat"
-            className="pr-8"
+            className=""
             leftIcon="pi pi-comments mr-2"
             headerClassName="flex align-content-between"
           >
@@ -81,7 +81,7 @@ const RoomLayout = () => {
           </TabPanel>
           <TabPanel
             header="Stats"
-            className="pr-6"
+            className=""
             leftIcon="pi pi-chart-bar mr-2"
             headerClassName="flex align-content-between"
           >
