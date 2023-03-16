@@ -53,7 +53,7 @@ const Favorates = (props) => {
                     <Zoom duration={1100} delay={600}>
                       <img
                         id="temp_img"
-                        src="../images/folder.jpg"
+                        src="/../images/folder.jpg"
                         height={120}
                         onClick={() => {
                           setind(ind + 1);
@@ -78,7 +78,7 @@ const Favorates = (props) => {
                     <Zoom duration={1100} delay={600}>
                       <img
                         id="temp_img"
-                        src="../images/file.jpg"
+                        src="/../images/file.jpg"
                         height={120}
                       />
                     </Zoom>

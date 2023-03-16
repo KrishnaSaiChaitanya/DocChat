@@ -33,7 +33,7 @@ function Layout() {
                     justifyContent: "center",
                   }}
                 >
-                  <img src="../images/logo.png" height={50} />
+                  <img src="/../images/logo.png" height={50} />
                 </div>
               </div>
               <div className="col-8 pl-3">

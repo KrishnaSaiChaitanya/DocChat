@@ -87,7 +87,7 @@ export default function Search() {
         >
           <img
             className="gif_img"
-            src="../images/loading_animation.gif"
+            src="/../images/loading_animation.gif"
             height={300}
           />
           <h3 className="text-center">Loading .....</h3>

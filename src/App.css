@@ -6,6 +6,9 @@
 .p-dialog-titlebar-close{
   display: none;
 }
+#file_container{
+  width: 100%;
+}
 @media(max-width: 1200px){
 .network_img {
   display: none;
@@ -23,6 +26,10 @@
 }
 #chat_img{
   height: 250px !important;
+}
+#file_container {
+  width: 100%!important;
+  /* margin: 0 !important; */
 }
 #gif_img{
   height: 300px !important;

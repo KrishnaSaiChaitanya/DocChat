@@ -59,7 +59,12 @@ export default function Login() {
           }}
         >
           <Zoom duration={"1200"}>
-            <img src="./images/logo.png" alt="hyper" height={90} className="" />
+            <img
+              src="/./images/logo.png"
+              alt="hyper"
+              height={90}
+              className=""
+            />
           </Zoom>
         </div>
         <Zoom duration={"1200"} delay={600}>

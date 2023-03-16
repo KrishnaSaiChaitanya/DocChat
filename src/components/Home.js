@@ -30,7 +30,7 @@ const Home = () => {
         <Zoom duration={"1200"} delay={600}>
           <img
             id="home_img"
-            src="./images/room.jpg"
+            src="/./images/room.jpg"
             style={{ height: "70vh", padding: "30px" }}
           />
         </Zoom>

@@ -51,7 +51,7 @@ const RoomLayout = () => {
         className="network_img"
         style={{ position: "absolute", bottom: "0", right: "0" }}
       >
-        <img src=".../images/network.jpg" height={250} />
+        <img src="/.../images/network.jpg" height={250} />
       </div>
       <div className=" pt-3">
         <TabView>

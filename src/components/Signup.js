@@ -49,7 +49,7 @@ export default function Registration() {
     <div className="sign_up_back">
       <div className="text-center pt-7">
         <Zoom duration={"1200"}>
-          <img src="./images/logo.png" alt="hyper" height={90} className="" />
+          <img src="/./images/logo.png" alt="hyper" height={90} className="" />
         </Zoom>
       </div>
       <Zoom duration={"1200"} delay={600}>
