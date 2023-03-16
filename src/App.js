@@ -35,7 +35,10 @@ function App() {
         </Route>
         <Route path="createroom" element={<CreateRoom />} />
         <Route path="about" element={<About />} />
-        <Route path="room/:id" element={<RoomLayout />} />
+        <Route path="room/:id" element={<RoomLayout />}>
+          <Route path="*" element={<RoomLayout />} />
+        </Route>
+
         {/* <Route path="dashboard" element={<Dashboard />} /> */}
 
         {/* Using path="*"" means "match anything", so this route

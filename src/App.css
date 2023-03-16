@@ -18,9 +18,13 @@
 }
 #home_img{
   padding-top: 30px;
-  height: 400px !important
+  height: 380px !important;
+  /* flex-direction : column !important; */
 }
 #chat_img{
+  height: 250px !important;
+}
+#gif_img{
   height: 300px !important;
 }
 #home_ {

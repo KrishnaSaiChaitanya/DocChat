@@ -57,7 +57,7 @@ const Hero = () => {
         <div className="col-12 md:col-6 overflow-hidden pt-8">
           <Zoom duration={"1200"}>
             <img
-              src="./images/hero.jpg"
+              src="/./images/hero.jpg"
               alt="hero-1"
               // className="md:ml-auto block md:h-full"
               height={400}

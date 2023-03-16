@@ -11,6 +11,10 @@ const Files = () => {
   return (
     <div style={{ width: "100%" }}>
       <div class="grid grid-nogutter">
+        <div className="col-12 flex justify-content-center align-items-center ">
+          <h3 className="text-center mr-4">Path : </h3>
+          <Button text icon="pi pi-copy" rounded size="lg" />
+        </div>
         <div className="col-12 md:col-9 grid grid-nogutter">
           <div
             className="col-12"

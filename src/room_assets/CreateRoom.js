@@ -22,7 +22,11 @@ const CreateRoom = () => {
               justifyContent: "center",
             }}
           >
-            <img src="../images/loading_animation.gif" height={450} />
+            <img
+              id="chat_img"
+              src="../images/loading_animation.gif"
+              height={450}
+            />
           </div>
           <h3 className="text-center p-2">Creating Room .....</h3>
         </div>

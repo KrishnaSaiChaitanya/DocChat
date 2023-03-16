@@ -72,6 +72,7 @@ export default function Search() {
         visible={Visible}
         style={{ width: "60vw" }}
         onHide={() => setVisible(false)}
+        breakpoints={{ "960px": "85vw", "641px": "90vw" }}
       >
         <div
           className="homeroom_img"
@@ -80,11 +81,14 @@ export default function Search() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
+            paddingBottom: "50px",
           }}
         >
           <img
+            className="gif_img"
             src="../images/loading_animation.gif"
-            style={{ height: "50vh", padding: "10px" }}
+            height={300}
           />
           <h3 className="text-center">Loading .....</h3>
         </div>

@@ -85,7 +85,7 @@ const Chat = () => {
           <Zoom duration={"1200"}>
             <img
               id="chat_img"
-              src="../images/share.png"
+              src="../images/chat.jpg"
               style={{ height: "45vh", padding: "10px" }}
             />
           </Zoom>
@@ -108,14 +108,16 @@ const Chat = () => {
             style={{ width: "60vw" }}
             onHide={() => setVisible(false)}
             footer={footerContent}
+            breakpoints={{ "960px": "85vw", "641px": "90vw" }}
           >
             <div
-              className="homeroom_img"
+              className="gif_img"
               style={{
                 height: "45%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                flexDirection: "column",
               }}
             >
               <img
