@@ -18,16 +18,13 @@ export default function Upload() {
     setLoading(true);
     const formData = new FormData();
     console.log("upload button is clicked");
-    formData.append("file", fileUploadRef);
+    formData.append("file", fileUploadRef.current.getFiles()[0]);
     formData.append("upload_preset", "ska0dni8");
 
-    fetch(
-      "https://api.cloudinary.com/v1_1/dsfems7vy/image/upload/..images/logo.png",
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
+    fetch("https://api.cloudinary.com/v1_1/dsfems7vy/auto/upload", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
