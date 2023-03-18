@@ -16,10 +16,10 @@ export default function Upload() {
   const upload = () => {
     const formData = new FormData();
     console.log("upload button is clicked");
-    formData.append("file", fileUploadRef);
+    formData.append("file", fileUploadRef.current.getFiles()[0]);
     formData.append("upload_preset", "ska0dni8");
 
-    fetch("https://api.cloudinary.com/v1_1/dsfems7vy/image/upload", {
+    fetch("https://api.cloudinary.com/v1_1/dsfems7vy/auto/upload", {
       method: "POST",
       body: formData,
     })
