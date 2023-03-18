@@ -7,6 +7,7 @@ import "./auth.css";
 
 export default function Registration() {
   const navigate = useNavigate();
+
   // let router = useRouter();
   let [loading, setLoading] = useState(false);
   let [username, setUsername] = useState("");
@@ -91,6 +92,7 @@ export default function Registration() {
           >
             <Button
               label="Sign Up"
+              loading={loading}
               className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
               onClick={handleSubmit}
             />

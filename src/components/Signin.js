@@ -9,6 +9,7 @@ import "./auth.css";
 export default function Login() {
   const navigate = useNavigate();
   let [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
 
@@ -20,6 +21,7 @@ export default function Login() {
   // }, [session]);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     console.log(username, password);
     e.preventDefault();
@@ -40,6 +42,7 @@ export default function Login() {
     console.log({ data });
     if (res.status == 200) {
       console.log("Sucuss");
+      setLoading(false);
       localStorage.setItem("token", JSON.stringify(data.token.token));
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/");
@@ -99,6 +102,7 @@ export default function Login() {
               <Button
                 label="Sign In"
                 className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"
+                loading={loading}
                 onClick={handleSubmit}
               />
             </Link>

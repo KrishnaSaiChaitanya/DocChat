@@ -10,23 +10,29 @@ import { Zoom } from "react-reveal";
 const url = "https://api.cloudinary.com/v1_1/dsfems7vy/image/upload";
 export default function Upload() {
   const toast = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [totalSize, setTotalSize] = useState(0);
   const fileUploadRef = useRef(null);
 
   const upload = () => {
+    setLoading(true);
     const formData = new FormData();
     console.log("upload button is clicked");
     formData.append("file", fileUploadRef);
     formData.append("upload_preset", "ska0dni8");
 
-    fetch("https://api.cloudinary.com/v1_1/dsfems7vy/image/upload", {
-      method: "POST",
-      body: formData,
-    })
+    fetch(
+      "https://api.cloudinary.com/v1_1/dsfems7vy/image/upload/..images/logo.png",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
       });
+    setLoading(false);
   };
 
   const onTemplateSelect = (e) => {
@@ -217,6 +223,7 @@ export default function Upload() {
           <Button
             label="Upload Files"
             icon="pi pi-bolt"
+            loading={loading}
             className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
             onClick={upload}
           />

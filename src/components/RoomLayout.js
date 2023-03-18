@@ -7,6 +7,7 @@ import Upload from "../room_assets/Upload";
 import Stats from "../room_assets/Stats";
 import Files from "../room_assets/Files";
 import Menu from "./assets/Menu";
+import { Button } from "primereact/button";
 
 const RoomLayout = (props) => {
   const [id, setid] = useState({});
@@ -46,7 +47,19 @@ const RoomLayout = (props) => {
           </div> */}
         </div>
       </div>
-      <h2 className="text-center mt-3">Room Here .. {id.id}</h2>
+      <div className="flex mt-3 justify-content-center align-items-center">
+        <h2 className="text-center">Room Id :- {id.id}</h2>
+        <Button
+          text
+          className="ml-5"
+          icon="pi pi-share-alt"
+          rounded
+          size="lg"
+          onClick={() =>
+            navigator.clipboard.writeText("http://localhost:3000/room/bjcjsg")
+          }
+        />
+      </div>
       <div
         className="network_img"
         style={{ position: "absolute", bottom: "0", right: "0" }}
