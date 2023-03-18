@@ -20,7 +20,9 @@ import Hero from "./components/Hero";
 import Profile from "./components/Profile";
 import Favorates from "./components/Favorates";
 import CreateRoom from "./room_assets/CreateRoom";
+import { io } from "socket.io-client";
 
+const socketio = io("http://localhost:5000", { autoConnect: false });
 function App() {
   useFavicon("../images/logo.svg");
   return (
@@ -35,7 +37,7 @@ function App() {
         </Route>
         <Route path="createroom" element={<CreateRoom />} />
         <Route path="about" element={<About />} />
-        <Route path="room/:id" element={<RoomLayout />}>
+        <Route path="room/:id" element={<RoomLayout socketio={socketio} />}>
           <Route path="*" element={<RoomLayout />} />
         </Route>
 

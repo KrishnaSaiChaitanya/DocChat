@@ -1,28 +1,80 @@
 import { Button } from "primereact/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Tooltip } from "primereact/tooltip";
 import { Zoom } from "react-reveal";
+import { ScrollPanel } from "primereact/scrollpanel";
 
-const Chat = () => {
+const Chat = (props) => {
+  const socket = props.socketio;
+  useEffect(() => {
+    // Socket io
+    socket.on("connection", (socket) => {
+      console.log("connected ", socket.id);
+    });
+    socket.on("recive", (obj) => {
+      displaymmessage(obj);
+    });
+  });
+  const [connected, setconnected] = useState(false);
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState("");
+  const displaymmessage = (val) => {
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+    p.textContent = val;
+    div.appendChild(p);
+    const styles1 = {
+      display: "flex",
+      margin: "3px",
+      justifyContent: "start",
+    };
+    const styles2 = {
+      // border: "1px solid black",
+      padding: "12px",
+      backgroundColor: "#E8F0FE",
+
+      borderRadius: "10px",
+      width: "fit-content",
+    };
+    Object.assign(div.style, styles1);
+    Object.assign(p.style, styles2);
+    console.log(div.textContent);
+    document.getElementById("messageContainer").append(div);
+    setValue("");
+  };
+  const sendmessage = (val) => {
+    socket.emit("hello", val);
+
+    // ------------------
+
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+    p.textContent = val;
+    div.appendChild(p);
+    const styles1 = {
+      display: "flex",
+      margin: "3px",
+      justifyContent: "end",
+    };
+    const styles2 = {
+      // border: "1px solid black",
+      padding: "12px",
+      backgroundColor: "#E8F0FE",
+
+      borderRadius: "10px",
+      width: "fit-content",
+    };
+    Object.assign(div.style, styles1);
+    Object.assign(p.style, styles2);
+    console.log(div.textContent);
+    document.getElementById("messageContainer").append(div);
+    setValue("");
+  };
   const header = (
     <div className="grid grid-nogutter grid grid-nogutter-nogutter">
       <div className="col-2">
-        {/* <Tooltip
-          target=".custom-tooltip-btn"
-          tooltipOptions={{ position: "bottom" }}
-        >
-          <img
-            alt="logo"
-            src="https://primefaces.org/cdn/primereact/images/logo.png"
-            data-pr-tooltip="PrimeReact-Logo"
-            height="80px"
-          />
-        </Tooltip> */}
-
         <Button
           className="custom-tooltip-btn"
           type="button"
@@ -39,7 +91,7 @@ const Chat = () => {
     </div>
   );
   const footerContent = (
-    <div className="grid grid-nogutter">
+    <div className="grid grid-nogutter mt-3">
       <div className="col-8">
         <InputTextarea
           style={{ width: "50vw" }}
@@ -54,6 +106,9 @@ const Chat = () => {
           icon="pi pi-send"
           rounded
           size="lg"
+          onClick={() => {
+            sendmessage(value);
+          }}
           texticon="pi pi-check"
           text
           tooltip="Send message"
@@ -110,33 +165,46 @@ const Chat = () => {
             footer={footerContent}
             breakpoints={{ "960px": "85vw", "641px": "90vw" }}
           >
-            <div
-              className="gif_img"
-              style={{
-                height: "45%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <img
-                id="home_img"
-                src="/../images/loading_animation.gif"
-                height={300}
-              />
-              <h3 className="text-center">Loading .....</h3>
-            </div>
+            {connected ? (
+              <div
+                className="gif_img"
+                style={{
+                  height: "45%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <img
+                  id="home_img"
+                  src="/../images/loading_animation.gif"
+                  height={300}
+                />
+                <h3 className="text-center">Loading .....</h3>
+              </div>
+            ) : (
+              <div className="">
+                <ScrollPanel
+                  id="messageContainer"
+                  style={{ width: "100%", height: "150px", padding: "20px" }}
+                  className="custombar1 p-4 pt-0 mb-3"
+                ></ScrollPanel>
+              </div>
+            )}
           </Dialog>
           <Button
-            tooltip="Enter your username"
+            tooltip="Join Chat room"
             tooltipOptions={{ position: "top" }}
             label="Create Room"
-            onClick={() => setVisible(true)}
+            onClick={() => {
+              setVisible(true);
+            }}
             icon="pi pi-bolt"
-            className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap ml-8 m-4 "
+            className="m-3 font-bold px-5 py-3 p-button-raised p-button-rounded   "
           />
         </div>
+
         {/* <h2 className="text-center pt-3 pb-3">or</h2>
         <div
           style={{

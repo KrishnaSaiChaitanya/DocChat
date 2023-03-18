@@ -7,10 +7,27 @@ import { Tooltip } from "primereact/tooltip";
 import { Tag } from "primereact/tag";
 import { Zoom } from "react-reveal";
 
+const url = "https://api.cloudinary.com/v1_1/dsfems7vy/image/upload";
 export default function Upload() {
   const toast = useRef(null);
   const [totalSize, setTotalSize] = useState(0);
   const fileUploadRef = useRef(null);
+
+  const upload = () => {
+    const formData = new FormData();
+    console.log("upload button is clicked");
+    formData.append("file", fileUploadRef);
+    formData.append("upload_preset", "ska0dni8");
+
+    fetch("https://api.cloudinary.com/v1_1/dsfems7vy/image/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   const onTemplateSelect = (e) => {
     let _totalSize = totalSize;
@@ -201,6 +218,7 @@ export default function Upload() {
             label="Upload Files"
             icon="pi pi-bolt"
             className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
+            onClick={upload}
           />
         </div>
       </div>

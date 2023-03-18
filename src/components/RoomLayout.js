@@ -8,7 +8,7 @@ import Stats from "../room_assets/Stats";
 import Files from "../room_assets/Files";
 import Menu from "./assets/Menu";
 
-const RoomLayout = () => {
+const RoomLayout = (props) => {
   const [id, setid] = useState({});
   const num = useParams();
   useEffect(() => {
@@ -77,7 +77,7 @@ const RoomLayout = () => {
             leftIcon="pi pi-comments mr-2"
             headerClassName="flex align-content-between"
           >
-            <Chat />
+            <Chat socketio={props.socketio} />
           </TabPanel>
           <TabPanel
             header="Stats"

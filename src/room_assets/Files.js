@@ -19,9 +19,15 @@ const Files = () => {
           <h3 className="text-center mr-4">
             Path : {"  "}/ {params["*"]}{" "}
           </h3>
-          <Button text icon="pi pi-copy" rounded size="lg" />
+          <Button
+            text
+            icon="pi pi-copy"
+            rounded
+            size="lg"
+            onClick={() => navigator.clipboard.writeText(params["*"])}
+          />
         </div>
-        <div className="col-12 md:col-9 grid grid-nogutter">
+        <div className="col-12 md:col-12 grid grid-nogutter">
           <div
             className="col-12"
             style={{
@@ -33,34 +39,34 @@ const Files = () => {
           >
             <Search />
           </div>
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <img src="/../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <img src="/../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <img src="/../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <img src="/../images/folder.jpg" height={120} id="temp_img" />
             </Zoom>
           </div>{" "}
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <Link to={"yeah hoo....."}>
                 <img src="/../images/folder.jpg" height={120} id="temp_img" />
               </Link>
             </Zoom>
           </div>
-          <div class="col-4 p-3 ">
+          <div class="col-4 flex justify-content-center align-items-center p-3 ">
             <Zoom duration={1100} delay={600}>
               <Link to={"dfh"}>
                 <img src="/../images/folder.jpg" height={120} id="temp_img" />
@@ -68,7 +74,7 @@ const Files = () => {
             </Zoom>
           </div>
         </div>
-        <div
+        {/* <div
           className="col-12 md:col-3 p-3"
           style={{
             display: "flex",
@@ -86,7 +92,7 @@ const Files = () => {
               onClick={() => setVisible(true)}
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Dialog

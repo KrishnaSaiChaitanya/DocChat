@@ -18,7 +18,11 @@ const Error404 = () => {
         }}
       >
         <Zoom duration={"1200"}>
-          <img src="/./images/error.jpg" style={{ height: "80vh" }} />
+          <img
+            id="home_img"
+            src="/./images/error.jpg"
+            style={{ height: "80vh" }}
+          />
         </Zoom>
       </div>
     </div>
