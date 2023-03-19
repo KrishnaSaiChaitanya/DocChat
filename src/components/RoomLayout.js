@@ -20,8 +20,8 @@ const RoomLayout = (props) => {
   return (
     <div style={{ backgroundColor: "#FFFFFF", height: "100%" }}>
       <div className="grid grid-nogutter">
-        <div className="col-12 grid grid-nogutter mt-3 mb-3">
-          {/* <div
+        {/* <div className="col-12 grid grid-nogutter mt-3 mb-3">
+          <div
             className="col-1"
             style={{
               display: "flex",
@@ -44,10 +44,13 @@ const RoomLayout = (props) => {
           </div>
           <div className="col-2">
             <Menu />
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </div>
-      <div className="flex mt-3 justify-content-center align-items-center">
+      <div
+        id="room_grid"
+        className="flex mt-3 justify-content-center align-items-center"
+      >
         <h2 className="text-center">Room Id :- {id.id}</h2>
         <Button
           text

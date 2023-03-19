@@ -9,9 +9,15 @@
 #file_container{
   width: 100%;
 }
+#room_grid {
+  margin-top: 30px !important;
+}
 @media only screen and (min-width: 1500px) and (max-width: 2200px) {
 .p-tabview-nav-container{
   padding: 10px;
+}
+#room_grid{
+  margin-top: 60px;
 }
 #temp_img{
   height: 80px;
