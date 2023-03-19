@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { FileUpload } from "primereact/fileupload";
 import { ProgressBar } from "primereact/progressbar";
@@ -6,16 +6,28 @@ import { Button } from "primereact/button";
 import { Tooltip } from "primereact/tooltip";
 import { Tag } from "primereact/tag";
 import { Zoom } from "react-reveal";
+import { Dialog } from "primereact/dialog";
 
-const url = "https://api.cloudinary.com/v1_1/dsfems7vy/image/upload";
+import { InputMask } from "primereact/inputmask";
+import { InputText } from "primereact/inputtext";
+
 export default function Upload() {
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("token")));
+  }, []);
   const toast = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  const [name, setname] = useState("");
+  const [path, setpath] = useState("");
   const [loading, setLoading] = useState(false);
   const [totalSize, setTotalSize] = useState(0);
   const fileUploadRef = useRef(null);
 
   const upload = () => {
     setLoading(true);
+    setVisible(false);
+
     const formData = new FormData();
     console.log("upload button is clicked");
     formData.append("file", fileUploadRef.current.getFiles()[0]);
@@ -26,9 +38,35 @@ export default function Upload() {
       body: formData,
     })
       .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        setLoading(false);
+      .then(async (result) => {
+        console.log(result.format, result.url, totalSize);
+        const p = path + name + "." + result.format;
+        setpath(p);
+        let res = await fetch(
+          "https://docchat-backend.onrender.com/api/file/newFile",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              name: name,
+              fileType: result.format,
+              path: path,
+              url: result.url,
+              size: totalSize,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${JSON.parse(localStorage.getItem("token"))}`,
+            },
+          }
+        );
+        if (res.status == 200) {
+          setLoading(false);
+          console.log("Uploaded");
+          alert("uploaded Sucussfully");
+        } else {
+          console.log(res.json());
+          setLoading(false);
+        }
       });
   };
 
@@ -113,11 +151,7 @@ export default function Upload() {
             <small>{new Date().toLocaleDateString()}</small>
           </span>
         </div>
-        <Tag
-          value={props.formatSize}
-          severity="warning"
-          className="px-3 py-2"
-        />
+
         <Button
           type="button"
           icon="pi pi-times"
@@ -173,58 +207,108 @@ export default function Upload() {
       <div>
         <Toast ref={toast}></Toast>
 
-        {/* <Tooltip
-          target=".custom-choose-btn"
-          content="Choose"
-          position="bottom"
-        />
-        <Tooltip
-          target=".custom-upload-btn"
-          content="Upload"
-          position="bottom"
-        />
-        <Tooltip
-          target=".custom-cancel-btn"
-          content="Clear"
-          position="bottom"
-        /> */}
-
-        <FileUpload
+        <Dialog
+          visible={visible}
           style={{ width: "60vw" }}
-          id="file_container"
-          ref={fileUploadRef}
-          name="demo[]"
-          url="/api/upload"
-          multiple
-          accept="image/*"
-          maxFileSize={1000000}
-          onUpload={onTemplateUpload}
-          onSelect={onTemplateSelect}
-          onError={onTemplateClear}
-          onClear={onTemplateClear}
-          headerTemplate={headerTemplate}
-          itemTemplate={itemTemplate}
-          emptyTemplate={emptyTemplate}
-          chooseOptions={chooseOptions}
-          uploadOptions={uploadOptions}
-          cancelOptions={cancelOptions}
-        />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "10px",
-          }}
+          onHide={() => setVisible(false)}
+          breakpoints={{ "960px": "85vw", "641px": "90vw" }}
         >
-          <Button
-            label="Upload Files"
-            icon="pi pi-bolt"
-            loading={loading}
-            className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
-            onClick={upload}
-          />
-        </div>
+          <div className="">
+            <div
+              className="flex flex-column align-items-center"
+              // style={{
+              //   display: "flex",
+              //   flexDirection: "column",
+              //   justifyContent: "center",
+              // }}
+            >
+              <div className="p-inputgroup m-2 w-30rem  flex">
+                <span className="p-inputgroup-addon ">/</span>
+                <InputText
+                  placeholder="Path"
+                  onChange={(e) => setpath(e.target.value)}
+                />
+              </div>
+
+              <div className="p-inputgroup m-2 w-30rem  flex">
+                <span className="p-inputgroup-addon">Name</span>
+                <InputText
+                  placeholder="Enter name of the file"
+                  onChange={(e) => setname(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="justify-content-center flex">
+              <Button
+                label="Upload Files"
+                icon="pi pi-bolt"
+                loading={loading}
+                className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap m-4 "
+                onClick={upload}
+              />
+            </div>
+          </div>
+        </Dialog>
+        {!loading ? (
+          <div className="">
+            <FileUpload
+              style={{ width: "60vw" }}
+              id="file_container"
+              ref={fileUploadRef}
+              name="demo[]"
+              url="/api/upload"
+              multiple
+              accept="image/*"
+              maxFileSize={1000000}
+              onUpload={onTemplateUpload}
+              onSelect={onTemplateSelect}
+              onError={onTemplateClear}
+              onClear={onTemplateClear}
+              headerTemplate={headerTemplate}
+              itemTemplate={itemTemplate}
+              emptyTemplate={emptyTemplate}
+              chooseOptions={chooseOptions}
+              uploadOptions={uploadOptions}
+              cancelOptions={cancelOptions}
+            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "10px",
+              }}
+            >
+              <Button
+                label="Upload Files"
+                icon="pi pi-bolt"
+                loading={loading}
+                className="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap "
+                onClick={() => {
+                  setVisible(true);
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <div
+            className="gif_img"
+            style={{
+              height: "45%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <img
+              id="home_img"
+              src="/../images/loading_animation.gif"
+              height={300}
+            />
+            <h3 className="text-center">Uploading .....</h3>
+          </div>
+        )}
       </div>
     </div>
   );

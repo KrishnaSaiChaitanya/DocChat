@@ -19,7 +19,7 @@ function Layout() {
           >
             <div className="col-12 grid-nogutter grid mt-6">
               <div
-                className="col-4"
+                className="col-12 md:col-4"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -36,7 +36,7 @@ function Layout() {
                   <img src="/../images/logo.png" height={50} />
                 </div>
               </div>
-              <div className="col-8 pl-3">
+              <div className="col-12 md:col-8 pl-3">
                 <h1 className="text-start ">Doc Chat</h1>
               </div>
             </div>
