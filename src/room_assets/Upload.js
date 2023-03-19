@@ -40,8 +40,6 @@ export default function Upload() {
       .then((response) => response.json())
       .then(async (result) => {
         console.log(result.format, result.url, totalSize);
-        const p = path + name + "." + result.format;
-        setpath(p);
         let res = await fetch(
           "https://docchat-backend.onrender.com/api/file/newFile",
           {
@@ -49,7 +47,7 @@ export default function Upload() {
             body: JSON.stringify({
               name: name,
               fileType: result.format,
-              path: path,
+              path: path + name + "." + result.format,
               url: result.url,
               size: totalSize,
             }),
