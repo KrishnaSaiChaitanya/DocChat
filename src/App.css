@@ -10,14 +10,17 @@
   width: 100%;
 }
 #room_grid {
-  margin-top: 30px !important;
+  margin-top: 30px ;
 }
-@media only screen and (min-width: 1500px) and (max-width: 2200px) {
+@media only screen and (min-width: 1200px) and (max-width: 2200px) {
 .p-tabview-nav-container{
   padding: 10px;
 }
-#room_grid{
-  margin-top: 60px;
+/* #room_grid{
+  margin-top: 10px !important;
+} */
+.p-fileupload-content {
+  height: 40vh;
 }
 #temp_img{
   height: 80px;

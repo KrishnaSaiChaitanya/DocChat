@@ -17,7 +17,7 @@ function Layout() {
               alignItems: "center",
             }}
           >
-            <div className="col-12 grid-nogutter grid mt-6">
+            <div className="col-12 grid-nogutter grid mt-6"> {/* Name */}
               <div
                 className="col-4"
                 style={{
@@ -45,9 +45,11 @@ function Layout() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                flexDirection: "column",
+                width: "100%",
               }}
             >
+              <div className="justify-content-center align-items-center flex">
               <Link to="/profile" style={{ textDecoration: "none" }}>
                 <Button
                   className="justify-content-center align-items-center flex"
@@ -59,20 +61,7 @@ function Layout() {
                   aria-label="User"
                 />
               </Link>
-            </div>
-            <div
-              className="col-12"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                //  marginTop: "40%",
-                flexDirection: "column",
-                position: "relative",
-                bottom: "60px",
-                width: "100%",
-              }}
-            >
-              <div className="">
+              </div>
                 <div className="p-1 justify-content-center align-items-center flex">
                   <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
                     <Button label="Room 1" outlined rounded />
@@ -102,7 +91,6 @@ function Layout() {
                 <div className="col-12 pt-3 justify-content-center align-items-center flex">
                   <Button label="view more ..." text />
                 </div>
-              </div>
             </div>
           </div>
         </Fade>
