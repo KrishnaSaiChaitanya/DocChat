@@ -9,6 +9,14 @@
 #file_container{
   width: 100%;
 }
+@media only screen and (min-width: 1500px) and (max-width: 2200px) {
+.p-tabview-nav-container{
+  padding: 10px;
+}
+#temp_img{
+  height: 80px;
+}
+}
 @media(max-width: 1200px){
 .network_img {
   display: none;

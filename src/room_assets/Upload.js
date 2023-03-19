@@ -28,8 +28,8 @@ export default function Upload() {
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   const onTemplateSelect = (e) => {

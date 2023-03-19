@@ -10,6 +10,7 @@ const Files = () => {
   let params = useParams();
   const navigate = useNavigate();
   console.log(params["*"]);
+  console.log(params["id"]);
   const [visible, setVisible] = useState(false);
   const header = <h2 className="text-center">File splliter</h2>;
   return (
@@ -17,14 +18,17 @@ const Files = () => {
       <div class="grid grid-nogutter">
         <div className="col-12 flex justify-content-center align-items-center ">
           <h3 className="text-center mr-4">
-            Path : {"  "}/ {params["*"]}{" "}
+            Path : {"  "}/{params["id"]}/{params["*"]}{" "}
           </h3>
           <Button
             text
             icon="pi pi-copy"
             rounded
             size="lg"
-            onClick={() => navigator.clipboard.writeText(params["*"])}
+            onClick={() => {
+              const val = params["id"] + "/" + params["*"];
+              navigator.clipboard.writeText(val);
+            }}
           />
         </div>
         <div className="col-12 md:col-12 grid grid-nogutter">
