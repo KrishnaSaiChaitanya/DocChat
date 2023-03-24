@@ -21,6 +21,7 @@ import Profile from "./components/Profile";
 import Favorates from "./components/Favorates";
 import CreateRoom from "./room_assets/CreateRoom";
 import { io } from "socket.io-client";
+import JoinRoom from "./room_assets/JoinRoom";
 
 const socketio = io("http://localhost:5000", { autoConnect: false });
 function App() {
@@ -36,6 +37,7 @@ function App() {
           </Route>
         </Route>
         <Route path="createroom" element={<CreateRoom />} />
+        <Route path="joinroom/:id" element={<JoinRoom />} />
         <Route path="about" element={<About />} />
         <Route path="room/:id" element={<RoomLayout socketio={socketio} />}>
           <Route path="*" element={<RoomLayout />} />

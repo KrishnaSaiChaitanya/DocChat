@@ -69,7 +69,7 @@ const RoomLayout = (props) => {
       >
         <img src="/.../images/network.jpg" height={250} />
       </div>
-      <div className=" pt-3">
+      <div className=" pt-0">
         <TabView>
           <TabPanel
             className=""

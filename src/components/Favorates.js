@@ -62,10 +62,7 @@ const Favorates = (props) => {
                     </Zoom>
                   </div>
                   <div className="col-12 ">
-                    <p className="text-center p-2">
-                      {item.name}
-                      {ind}
-                    </p>
+                    <p className="text-center p-2">{item.name}</p>
                   </div>
                 </div>
               ))
@@ -84,10 +81,7 @@ const Favorates = (props) => {
                     </Zoom>
                   </div>
                   <div className="col-12 ">
-                    <p className="text-center p-2">
-                      {item.name}
-                      {ind}
-                    </p>
+                    <p className="text-center p-2">{item.name}</p>
                   </div>
                 </div>
               ))}

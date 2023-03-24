@@ -17,7 +17,9 @@ function Layout() {
               alignItems: "center",
             }}
           >
-            <div className="col-12 grid-nogutter grid mt-6"> {/* Name */}
+            <div className="col-12 grid-nogutter grid mt-3">
+              {" "}
+              {/* Name */}
               <div
                 className="col-4"
                 style={{
@@ -50,47 +52,47 @@ function Layout() {
               }}
             >
               <div className="justify-content-center align-items-center flex">
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <Button
-                  className="justify-content-center align-items-center flex"
-                  size="lg"
-                  icon="pi pi-user"
-                  rounded
-                  outlined
-                  severity="info"
-                  aria-label="User"
-                />
-              </Link>
+                <Link to="/profile" style={{ textDecoration: "none" }}>
+                  <Button
+                    className="justify-content-center align-items-center flex"
+                    size="lg"
+                    icon="pi pi-user"
+                    rounded
+                    outlined
+                    severity="info"
+                    aria-label="User"
+                  />
+                </Link>
               </div>
-                <div className="p-1 justify-content-center align-items-center flex">
-                  <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
-                    <Button label="Room 1" outlined rounded />
-                  </Link>
-                </div>
-                <div className="p-1 justify-content-center align-items-center flex">
-                  <Link to="/about" style={{ textDecoration: "none" }}>
-                    <Button label="Room 2" outlined rounded />
-                  </Link>
-                </div>
-                <div className="p-1 justify-content-center align-items-center flex">
-                  <Link to="/room/647bjd" style={{ textDecoration: "none" }}>
-                    <Button label="Room 3" outlined rounded />
-                  </Link>
-                </div>
-                <div className="p-1 justify-content-center align-items-center flex">
-                  <Link to="/ro" style={{ textDecoration: "none" }}>
-                    <Button label="Room 4" outlined rounded />
-                  </Link>
-                </div>
-                <div className="p-1 justify-content-center align-items-center flex">
-                  <Link to="/room/bjcjsg" style={{ textDecoration: "none" }}>
-                    <Button label="Room 5" outlined rounded />
-                  </Link>
-                </div>
+              <div className="p-1 justify-content-center align-items-center flex pt-4">
+                <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
+                  <Button label="Room 1" outlined rounded />
+                </Link>
+              </div>
+              <div className="p-1 justify-content-center align-items-center flex">
+                <Link to="/about" style={{ textDecoration: "none" }}>
+                  <Button label="Room 2" outlined rounded />
+                </Link>
+              </div>
+              <div className="p-1 justify-content-center align-items-center flex">
+                <Link to="/room/647bjd" style={{ textDecoration: "none" }}>
+                  <Button label="Room 3" outlined rounded />
+                </Link>
+              </div>
+              <div className="p-1 justify-content-center align-items-center flex">
+                <Link to="/ro" style={{ textDecoration: "none" }}>
+                  <Button label="Room 4" outlined rounded />
+                </Link>
+              </div>
+              <div className="p-1 justify-content-center align-items-center flex">
+                <Link to="/room/bjcjsg" style={{ textDecoration: "none" }}>
+                  <Button label="Room 5" outlined rounded />
+                </Link>
+              </div>
 
-                <div className="col-12 pt-3 justify-content-center align-items-center flex">
-                  <Button label="view more ..." text />
-                </div>
+              <div className="col-12 pt-3 justify-content-center align-items-center flex">
+                <Button label="view more ..." text />
+              </div>
             </div>
           </div>
         </Fade>

@@ -7,10 +7,51 @@ import { InputText } from "primereact/inputtext";
 import { Zoom } from "react-reveal";
 
 const CreateRoom = () => {
-  const options = ["Public", "private"];
+  const options = ["Public", "Private"];
+  const [name, setName] = useState("");
+  const [visability, setvisability] = useState(false);
+  const [count, setCount] = useState(1);
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState(options[0]);
   const [isloading, setisloading] = useState(false);
+  const createroom = async () => {
+    if (value == "private") {
+      setValue(true);
+    } else {
+      setValue(false);
+    }
+    console.log(
+      name,
+      count,
+      JSON.parse(localStorage.getItem("user"))._id,
+      visability
+    );
+    let res = await fetch(
+      "https://docchat-backend.onrender.com/api/room/newRoom",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          maxUsers: count,
+          private: visability,
+          user: JSON.parse(localStorage.getItem("user"))._id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      }
+    );
+    if (res.status == 200) {
+      setisloading(false);
+      console.log("Uploaded");
+      alert("Room created Sucussfully");
+    } else {
+      console.log(res.json());
+      setisloading(false);
+    }
+  };
+
   return (
     <div style={{ height: "100%" }}>
       {isloading && (
@@ -58,19 +99,6 @@ const CreateRoom = () => {
             <Zoom duration={"1200"} delay={600}>
               <div>
                 <label
-                  htmlFor="text"
-                  className="block text-900 font-medium mb-2"
-                >
-                  Email
-                </label>
-                <InputText
-                  id="email"
-                  type="text"
-                  placeholder="Email address"
-                  className="w-full mb-3"
-                />
-
-                <label
                   htmlFor="password"
                   className="block text-900 font-medium mb-2"
                 >
@@ -80,11 +108,36 @@ const CreateRoom = () => {
                   id="password"
                   placeholder="Enter Name of your room"
                   className="w-full mb-3"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                 />
+                <div className="flex align-items-center justify-content-center p-3">
+                  <Button
+                    type="button"
+                    icon="pi pi-plus"
+                    onClick={() => setCount(count + 1)}
+                    className="p-button-rounded p-button-success ml-2"
+                  ></Button>
+                  <h3 className="text-center px-2" style={{ minWidth: "5rem" }}>
+                    Max users: {count}
+                  </h3>
+                  <Button
+                    type="button"
+                    icon="pi pi-minus"
+                    onClick={() => setCount(count - 1)}
+                    className="p-button-rounded p-button-danger ml-2"
+                  ></Button>
+                </div>
                 <div className="p-3 flex justify-content-center">
                   <SelectButton
                     value={value}
-                    onChange={(e) => setValue(e.value)}
+                    onChange={(e) => {
+                      if (e.value == "Private") {
+                        setValue(e.value);
+                        setvisability(true);
+                      }
+                    }}
                     options={options}
                   />
                 </div>
@@ -110,6 +163,7 @@ const CreateRoom = () => {
                     className="w-full"
                     onClick={() => {
                       setisloading(true);
+                      createroom();
                     }}
                   />
                 </div>

@@ -80,7 +80,7 @@ const Profile = (props) => {
             </div>
             <div className="p-5">
               <div className="grid grid-nogutter m-3 p-4 ">
-                <div className="col-12 md:col-4 py-3 justify-content-center flex">
+                <div className="col-12 md:col-4 py-3 justify-content-center flex ">
                   <h3
                     className="text-center "
                     style={{ border: "1px solid black", width: "30%" }}
