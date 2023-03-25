@@ -1,12 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import swal from "sweetalert";
 import { Zoom } from "react-reveal";
 import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 
 import { Link, useNavigate, useRouteError } from "react-router-dom";
 import "./auth.css";
 
 export default function Login() {
+  const toast = useRef(null);
+
+  const showSticky = (severity, summary, Message) => {
+    console.log("inside toast");
+    toast.current.show({
+      severity: severity,
+      summary: summary,
+      detail: Message,
+      sticky: true,
+    });
+  };
   const navigate = useNavigate();
   let [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,16 +54,24 @@ export default function Login() {
     console.log({ data });
     if (res.status == 200) {
       console.log("Sucuss");
+
+      showSticky("success", "Successfully Logged In", "Welcome Back 🤩🤩");
+
       setLoading(false);
       localStorage.setItem("token", JSON.stringify(data.token.token));
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/");
+      navigate(-1);
+      setTimeout(() => {
+        navigate(-1);
+      }, 1000);
     } else {
       console.log("errorr");
+      showSticky("error", data, "");
     }
   };
   return (
     <>
+      <Toast ref={toast} />
       <div>
         <div
           className="text-center pt-8"

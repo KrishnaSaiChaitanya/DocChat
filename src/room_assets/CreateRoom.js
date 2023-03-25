@@ -1,12 +1,24 @@
 import { Button } from "primereact/button";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { Checkbox } from "primereact/checkbox";
 import { SelectButton } from "primereact/selectbutton";
 import { InputText } from "primereact/inputtext";
 import { Zoom } from "react-reveal";
+import { Toast } from "primereact/toast";
 
 const CreateRoom = () => {
+  const toast = useRef(null);
+
+  const showSticky = (severity, summary, Message) => {
+    console.log("inside toast");
+    toast.current.show({
+      severity: severity,
+      summary: summary,
+      detail: Message,
+      sticky: true,
+    });
+  };
   const options = ["Public", "Private"];
   const [name, setName] = useState("");
   const [visability, setvisability] = useState(false);
@@ -42,18 +54,26 @@ const CreateRoom = () => {
         },
       }
     );
+    const data = await res.json();
     if (res.status == 200) {
       setisloading(false);
+      console.log(data);
+      localStorage.setItem("user", JSON.stringify(data));
       console.log("Uploaded");
-      alert("Room created Sucussfully");
+      showSticky(
+        "success",
+        "Room Created Successfully",
+        "Click here to View 🤩🤩"
+      );
     } else {
-      console.log(res.json());
+      console.log(data);
       setisloading(false);
     }
   };
 
   return (
     <div style={{ height: "100%" }}>
+      <Toast ref={toast} />
       {isloading && (
         <div style={{ height: "100%" }}>
           <div

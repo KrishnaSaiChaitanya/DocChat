@@ -1,10 +1,21 @@
 import { Button } from "primereact/button";
-import React, { useEffect } from "react";
+import { Toast } from "primereact/toast";
+import React, { useEffect, useRef } from "react";
 import { Zoom } from "react-reveal";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import Login from "./Signin";
 const Home = () => {
+  const toast = useRef(null);
+
+  const showSticky = (severity, summary, Message) => {
+    toast.current.show({
+      severity: severity,
+      summary: summary,
+      detail: Message,
+      sticky: true,
+    });
+  };
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -17,6 +28,10 @@ const Home = () => {
   // });
   return (
     <div>
+      <Toast ref={toast} />
+      {() =>
+        showSticky("success", "Successfully Logged In", "Welcome Back 🤩🤩")
+      }
       <div
         id="home_"
         className="homeroom_img"

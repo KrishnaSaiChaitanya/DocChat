@@ -14,8 +14,11 @@ import { SpeedDial } from "primereact/speeddial";
 
 const Files = () => {
   const menu = useRef(null);
-  const [arr, setarr] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   let params = useParams();
+  const [name, setname] = useState("");
+  const [loading, setloading] = useState(false);
+  const [path, setpath] = useState("./" + params["id"]);
+  const [arr, setarr] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   const [paginator, setpaginator] = useState(0);
   const onPageChange = (event) => {
     setpaginator(event.first);
@@ -48,11 +51,76 @@ const Files = () => {
 
   const [Folder, setFolder] = useState([]);
   const navigate = useNavigate();
-
-  const get_folders = async (val) => {
+  useEffect(() => {
+    setloading(true);
+    const get_folders = async (val) => {
+      // if (val != "./bjcjsg") {
+      //   setarr([]);
+      // } else {
+      //   setarr([1, 2, 3, 4, 5]);
+      // }
+      console.log(val);
+      let res = await fetch(
+        "https://docchat-backend.onrender.com/api/folder/getFiles",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            path: val,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${JSON.parse(localStorage.getItem("token"))}`,
+          },
+        }
+      );
+      let data = await res.json();
+      console.log(data);
+      setloading(false);
+      if (res.status == 200) {
+        setarr(data);
+        // alert("Sucussfully Fetched");
+      } else {
+        console.log("errorr");
+      }
+    };
+    console.log("A folder is selected and fetching details in path : ", path);
+    get_folders(path);
+  }, [path]);
+  const addFolder = async (val) => {
     console.log(val);
     let res = await fetch(
-      "https://docchat-backend.onrender.com/api/file/getFiles",
+      "https://docchat-backend.onrender.com/api/folder/newFolder",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: val,
+          path: path + "/" + val,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      }
+    );
+    let data = await res.json();
+    console.log(data);
+
+    if (res.status == 200) {
+      setloading(false);
+      setarr(data);
+      console.log(Folder);
+      console.log("Sucuss");
+      // alert("Sucussfully Fetched");
+    } else {
+      setloading(false);
+      console.log("errorr");
+    }
+  };
+  const get_folders = async (val) => {
+    setloading(true);
+    console.log(val);
+    let res = await fetch(
+      "https://docchat-backend.onrender.com/api/folder/getFiles",
       {
         method: "POST",
         body: JSON.stringify({
@@ -66,12 +134,15 @@ const Files = () => {
     );
     let data = await res.json();
     console.log(data);
+
     if (res.status == 200) {
-      setFolder(data["folder"].files);
+      setloading(false);
+      setarr(data);
       console.log(Folder);
       console.log("Sucuss");
       // alert("Sucussfully Fetched");
     } else {
+      setloading(false);
       console.log("errorr");
     }
   };
@@ -83,7 +154,7 @@ const Files = () => {
       <div class="grid grid-nogutter">
         <div className="col-12 flex justify-content-center align-items-center ">
           <h3 className="text-center mr-2">
-            Path : {"  "}/{params["id"]}/{params["*"]}{" "}
+            Path : {"  "}. /{params["*"]}{" "}
           </h3>
           <Button
             text
@@ -91,7 +162,7 @@ const Files = () => {
             rounded
             size="lg"
             onClick={() => {
-              const val = params["id"] + "/" + params["*"];
+              const val = "./" + params["id"] + "/" + params["*"] + "/";
               navigator.clipboard.writeText(val);
             }}
           />
@@ -118,6 +189,7 @@ const Files = () => {
                 <InputText
                   style={{ borderRadius: "30px" }}
                   placeholder="Enter name ..."
+                  onChange={(e) => setname(e.target.value)}
                 />
               </div>
               <div>
@@ -129,7 +201,8 @@ const Files = () => {
                   severity="info"
                   aria-label="User"
                   onClick={() => {
-                    setarr([...arr, 1]);
+                    setarr([...arr, { name: "new Folder", isFile: false }]);
+                    addFolder(name);
                   }}
                 />
               </div>
@@ -156,7 +229,10 @@ const Files = () => {
                 text
                 severity="info"
                 aria-label="User"
-                onClick={() => navigate(-1)}
+                onClick={() => {
+                  navigate(-1);
+                  setpath(path.split("/").slice(0, -1).join("/"));
+                }}
               />
             </div>
             <Search />
@@ -169,11 +245,13 @@ const Files = () => {
                 rounded
                 severity="info"
                 aria-label="User"
+                onClick={() => get_folders(path)}
               />
             </div>
             <div className="flex">
               <TieredMenu model={items} popup ref={menu} breakpoint="767px" />
               <Button
+                id="menu_button"
                 text
                 icon="pi pi-ellipsis-v"
                 rounded
@@ -183,70 +261,257 @@ const Files = () => {
               {/* <SpeedDial model={items} direction="down" /> */}
             </div>
           </div>
-          <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
-            <Zoom duration={1100} delay={600}>
-              <img src="/../images/folder.jpg" height={100} id="temp_img" />
-            </Zoom>
-            <h3>{paginator}</h3>
-          </div>
-          {paginator + 1 < arr.length && (
-            <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
-              <Zoom duration={1100} delay={600}>
-                <img src="/../images/folder.jpg" height={100} id="temp_img" />
-              </Zoom>
-              <h3>{paginator + 1}</h3>
+          {loading ? (
+            <div className="col -12 h-15rem flex justify-content-center align-items-center">
+              <h3 className="text-center">Loading ...</h3>
             </div>
-          )}
-          {paginator + 2 < arr.length && (
-            <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
-              <Zoom duration={1100} delay={600}>
-                <img src="/../images/folder.jpg" height={100} id="temp_img" />
-              </Zoom>
-              <h3>{paginator + 2}</h3>
-            </div>
-          )}
-          {paginator + 3 < arr.length && (
+          ) : (
             <>
-              <div class="col-4  flex flex-column justify-content-center align-items-center p-2 ">
-                <Zoom duration={1100} delay={600}>
-                  <img src="/../images/folder.jpg" height={100} id="temp_img" />
-                </Zoom>
-                <h3>{paginator + 3}</h3>
-              </div>
+              {arr.length == 0 ? (
+                <div className=" col -12 flex justify-content-center align-items-center">
+                  <img src="/../images/empty.jpg" height={280} />
+                </div>
+              ) : (
+                <>
+                  <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
+                    <Link to={arr[paginator].name}>
+                      <Zoom duration={800} delay={200}>
+                        {arr[paginator].isFile ? (
+                          <img
+                            src="/../images/file.jpg"
+                            height={100}
+                            alt="img"
+                            id="temp_img"
+                            onClick={() => {
+                              setpath(
+                                "./" + params["id"] + "/" + arr[paginator].name
+                              );
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src="/../images/folder.jpg"
+                            height={100}
+                            id="temp_img"
+                            alt="img"
+                            onClick={() => {
+                              setpath(
+                                "./" + params["id"] + "/" + arr[paginator].name
+                              );
+                            }}
+                          />
+                        )}
+                      </Zoom>
+                    </Link>
+                    <p className="text-center">{arr[paginator].name}</p>
+                  </div>
+                  {paginator + 1 < arr.length && (
+                    <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
+                      <Zoom duration={800} delay={200}>
+                        <Link to={arr[paginator + 1].name}>
+                          {arr[paginator + 1].isFile ? (
+                            <img
+                              src="/../images/file.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 1].name
+                                );
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src="/../images/folder.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 1].name
+                                );
+                              }}
+                            />
+                          )}
+                        </Link>
+                      </Zoom>
+                      {/* <h3>{paginator + 1}</h3> */}
+                      <p className="text-center">{arr[paginator + 1].name}</p>
+                    </div>
+                  )}
+                  {paginator + 2 < arr.length && (
+                    <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
+                      <Zoom duration={800} delay={200}>
+                        <Link to={arr[paginator + 2].name}>
+                          {arr[paginator + 2].isFile ? (
+                            <img
+                              src="/../images/file.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 2].name
+                                );
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src="/../images/folder.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 2].name
+                                );
+                              }}
+                            />
+                          )}
+                        </Link>
+                      </Zoom>
+                      {/* <h3>{paginator + 2}</h3> */}
+                      <p className="text-center">{arr[paginator + 2].name}</p>
+                    </div>
+                  )}
+                  {paginator + 3 < arr.length && (
+                    <>
+                      <div class="col-4  flex flex-column justify-content-center align-items-center p-2 ">
+                        <Zoom duration={800} delay={200}>
+                          <Link to={arr[paginator + 3].name}>
+                            {arr[paginator + 3].isFile ? (
+                              <img
+                                src="/../images/file.jpg"
+                                height={100}
+                                id="temp_img"
+                                alt="img"
+                                onClick={() => {
+                                  setpath(
+                                    "./" +
+                                      params["id"] +
+                                      "/" +
+                                      arr[paginator + 3].name
+                                  );
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src="/../images/folder.jpg"
+                                height={100}
+                                id="temp_img"
+                                alt="img"
+                                onClick={() => {
+                                  setpath(
+                                    "./" +
+                                      params["id"] +
+                                      "/" +
+                                      arr[paginator + 3].name
+                                  );
+                                }}
+                              />
+                            )}
+                          </Link>
+                        </Zoom>
+                        {/* <h3>{paginator + 3}</h3> */}
+                        <p className="text-center">{arr[paginator + 3].name}</p>
+                      </div>
+                    </>
+                  )}
+                  {paginator + 4 < arr.length && (
+                    <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
+                      <Zoom duration={800} delay={200}>
+                        <Link to={arr[paginator + 4].name}>
+                          {arr[paginator + 4].isFile ? (
+                            <img
+                              src="/../images/file.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 4].name
+                                );
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src="/../images/folder.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                setpath(
+                                  "./" +
+                                    params["id"] +
+                                    "/" +
+                                    arr[paginator + 4].name
+                                );
+                              }}
+                            />
+                          )}
+                        </Link>
+                      </Zoom>
+                      {/* <h3>{paginator + 4}</h3> */}
+                      <p className="text-center">{arr[paginator + 4].name}</p>
+                    </div>
+                  )}
+                  {paginator + 5 < arr.length && (
+                    <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
+                      <Zoom duration={800} delay={200}>
+                        <Link to={"dfh"}>
+                          {arr[paginator + 5].isFile ? (
+                            <img
+                              src="/../images/file.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                get_folders("./New Folder");
+                              }}
+                            />
+                          ) : (
+                            <img
+                              src="/../images/folder.jpg"
+                              height={100}
+                              alt="img"
+                              id="temp_img"
+                              onClick={() => {
+                                get_folders("./New Folder");
+                              }}
+                            />
+                          )}
+                        </Link>
+                      </Zoom>
+                      {/* <h3>{paginator + 5}</h3> */}
+                      <p className="text-center">{arr[paginator + 5].name}</p>
+                    </div>
+                  )}
+                </>
+              )}
             </>
           )}
-          {paginator + 4 < arr.length && (
-            <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
-              <Zoom duration={1100} delay={600}>
-                <Link to={"yeah hoo....."}>
-                  <img src="/../images/folder.jpg" height={100} id="temp_img" />
-                </Link>
-              </Zoom>
-              <h3>{paginator + 4}</h3>
-            </div>
-          )}
-          {paginator + 5 < arr.length && (
-            <div class="col-4 flex flex-column justify-content-center align-items-center p-2 ">
-              <Zoom duration={1100} delay={600}>
-                <Link to={"dfh"}>
-                  <img
-                    src="/../images/folder.jpg"
-                    height={100}
-                    id="temp_img"
-                    onClick={() => {
-                      get_folders("./New Folder");
-                    }}
-                  />
-                </Link>
-              </Zoom>
-              <h3>{paginator + 5}</h3>
-            </div>
-          )}
+
           {/* {Folder &&
             Folder.map((file) => (
               <>
                 <div class="col-4 flex justify-content-center align-items-center p-2 ">
-                  <Zoom duration={1100} delay={600}>
+                  <Zoom duration={800} delay={200}>
                     <img src="/../images/file.jpg" height={100} id="temp_img" />
                     <h5>{file.name}</h5>
                   </Zoom>

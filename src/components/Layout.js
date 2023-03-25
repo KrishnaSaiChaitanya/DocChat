@@ -65,7 +65,10 @@ function Layout() {
                 </Link>
               </div>
               <div className="p-1 justify-content-center align-items-center flex pt-4">
-                <Link to="/room/48698hd" style={{ textDecoration: "none" }}>
+                <Link
+                  to="/room/6417305cfcc2bf321b4b3753"
+                  style={{ textDecoration: "none" }}
+                >
                   <Button label="Room 1" outlined rounded />
                 </Link>
               </div>

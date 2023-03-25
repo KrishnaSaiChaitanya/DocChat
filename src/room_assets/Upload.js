@@ -57,12 +57,14 @@ export default function Upload() {
             },
           }
         );
+        const data = await res.json();
         if (res.status == 200) {
           setLoading(false);
           console.log("Uploaded");
+          console.log(data);
           alert("uploaded Sucussfully");
         } else {
-          console.log(res.json());
+          console.log(data);
           setLoading(false);
         }
       });

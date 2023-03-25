@@ -59,7 +59,9 @@ const RoomLayout = (props) => {
           rounded
           size="lg"
           onClick={() =>
-            navigator.clipboard.writeText("http://localhost:3000/room/bjcjsg")
+            navigator.clipboard.writeText(
+              `http://localhost:3000/joinroom/${id.id}`
+            )
           }
         />
       </div>

@@ -30,8 +30,11 @@
 .network_img {
   display: none;
 }  
+#menu_button{
+  display: none;
+}
 #temp_img{
-  height: 80px;
+  height: 70px;
 }
 #menu{
   display: none;
