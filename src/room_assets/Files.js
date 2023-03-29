@@ -18,7 +18,7 @@ const Files = () => {
   const [name, setname] = useState("");
   const [loading, setloading] = useState(false);
   const [path, setpath] = useState("./" + params["id"]);
-  const [arr, setarr] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [arr, setarr] = useState([]);
   const [paginator, setpaginator] = useState(0);
   const onPageChange = (event) => {
     setpaginator(event.first);
@@ -115,6 +115,7 @@ const Files = () => {
       setloading(false);
       console.log("errorr");
     }
+    get_folders(path);
   };
   const get_folders = async (val) => {
     setloading(true);
@@ -153,16 +154,14 @@ const Files = () => {
     <div style={{ width: "100%" }}>
       <div class="grid grid-nogutter">
         <div className="col-12 flex justify-content-center align-items-center ">
-          <h3 className="text-center mr-2">
-            Path : {"  "}. /{params["*"]}{" "}
-          </h3>
+          <h3 className="text-center mr-2">Path : {path}</h3>
           <Button
             text
             icon="pi pi-copy"
             rounded
             size="lg"
             onClick={() => {
-              const val = "./" + params["id"] + "/" + params["*"] + "/";
+              const val = path;
               navigator.clipboard.writeText(val);
             }}
           />
@@ -201,7 +200,10 @@ const Files = () => {
                   severity="info"
                   aria-label="User"
                   onClick={() => {
-                    setarr([...arr, { name: "new Folder", isFile: false }]);
+                    // setarr([
+                    //   ...arr,
+                    //   { name: name, isFile: false, path: path + "/" + name },
+                    // ]);
                     addFolder(name);
                   }}
                 />
@@ -283,9 +285,7 @@ const Files = () => {
                             alt="img"
                             id="temp_img"
                             onClick={() => {
-                              setpath(
-                                "./" + params["id"] + "/" + arr[paginator].name
-                              );
+                              setpath(path + "/" + arr[paginator].name);
                             }}
                           />
                         ) : (
@@ -295,9 +295,7 @@ const Files = () => {
                             id="temp_img"
                             alt="img"
                             onClick={() => {
-                              setpath(
-                                "./" + params["id"] + "/" + arr[paginator].name
-                              );
+                              setpath(path + "/" + arr[paginator].name);
                             }}
                           />
                         )}
@@ -316,12 +314,7 @@ const Files = () => {
                               alt="img"
                               id="temp_img"
                               onClick={() => {
-                                setpath(
-                                  "./" +
-                                    params["id"] +
-                                    "/" +
-                                    arr[paginator + 1].name
-                                );
+                                setpath(path + "/" + arr[paginator + 1].name);
                               }}
                             />
                           ) : (
@@ -331,12 +324,7 @@ const Files = () => {
                               alt="img"
                               id="temp_img"
                               onClick={() => {
-                                setpath(
-                                  "./" +
-                                    params["id"] +
-                                    "/" +
-                                    arr[paginator + 1].name
-                                );
+                                setpath(path + "/" + arr[paginator + 1].name);
                               }}
                             />
                           )}
@@ -357,12 +345,7 @@ const Files = () => {
                               alt="img"
                               id="temp_img"
                               onClick={() => {
-                                setpath(
-                                  "./" +
-                                    params["id"] +
-                                    "/" +
-                                    arr[paginator + 2].name
-                                );
+                                setpath(path + "/" + arr[paginator + 2].name);
                               }}
                             />
                           ) : (
@@ -372,12 +355,7 @@ const Files = () => {
                               alt="img"
                               id="temp_img"
                               onClick={() => {
-                                setpath(
-                                  "./" +
-                                    params["id"] +
-                                    "/" +
-                                    arr[paginator + 2].name
-                                );
+                                setpath(path + "/" + arr[paginator + 2].name);
                               }}
                             />
                           )}
