@@ -5,73 +5,59 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { Tooltip } from "primereact/tooltip";
 import { Zoom } from "react-reveal";
 import { ScrollPanel } from "primereact/scrollpanel";
+import { useParams } from "react-router-dom";
 
 const Chat = (props) => {
+  let params = useParams();
+  const roomId = params["id"]
+  const userId = JSON.parse(localStorage.getItem("user")).name
   const socket = props.socketio;
-  useEffect(() => {
-    // Socket io
-    socket.on("connection", (socket) => {
-      console.log("connected ", socket.id);
-    });
-    socket.on("recive", (obj) => {
-      displaymmessage(obj);
-    });
-  });
-  const [connected, setconnected] = useState(false);
+  const joinRoom = () => {
+    socket.emit('join_room', { "username" : userId, "room" : roomId })
+    setVisible(true)
+  }
   const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState("");
-  const displaymmessage = (val) => {
-    const div = document.createElement("div");
-    const p = document.createElement("p");
-    p.textContent = val;
-    div.appendChild(p);
-    const styles1 = {
-      display: "flex",
-      margin: "3px",
-      justifyContent: "start",
-    };
-    const styles2 = {
-      // border: "1px solid black",
-      padding: "12px",
-      backgroundColor: "#E8F0FE",
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([{
+    message: "Welcome to Chat",
+    username: ""
+  }]);
 
-      borderRadius: "10px",
-      width: "fit-content",
-    };
-    Object.assign(div.style, styles1);
-    Object.assign(p.style, styles2);
-    console.log(div.textContent);
-    document.getElementById("messageContainer").append(div);
-    setValue("");
-  };
-  const sendmessage = (val) => {
-    socket.emit("hello", val);
+  useEffect(() => {
+    socket.on('receive_message', (data) => {
+      console.log(data);
+      setMessages((state) => [
+        ...state,
+        {
+          message: data.message,
+          username: data.username,
+          __createdtime__: data.__createdtime__,
+        },
+      ]);
+    });
+    return () => socket.off('receive_message');
+  }, [socket]);
 
-    // ------------------
+  function formatDateFromTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
-    const div = document.createElement("div");
-    const p = document.createElement("p");
-    p.textContent = val;
-    div.appendChild(p);
-    const styles1 = {
-      display: "flex",
-      margin: "3px",
-      justifyContent: "end",
-    };
-    const styles2 = {
-      // border: "1px solid black",
-      padding: "12px",
-      backgroundColor: "#E8F0FE",
-
-      borderRadius: "10px",
-      width: "fit-content",
-    };
-    Object.assign(div.style, styles1);
-    Object.assign(p.style, styles2);
-    console.log(div.textContent);
-    document.getElementById("messageContainer").append(div);
-    setValue("");
-  };
+  const sendMessage = () => {
+    if (message !== '') {
+      const __createdtime__ = Date.now();
+      socket.emit('send_message', { "username" : userId, "room" : roomId, message, __createdtime__ });
+      setMessage('');
+    }
+    console.log(messages);
+  }
   const header = (
     <div className="grid grid-nogutter grid grid-nogutter-nogutter">
       <div className="col-2">
@@ -85,18 +71,18 @@ const Chat = (props) => {
           tooltipOptions={{ position: "bottom" }}
         />
       </div>
-      <div className="col-10">
+      <div style={{width : "100%"}}>
         <h2 className="text-center">Chat Room ...</h2>
       </div>
     </div>
   );
   const footerContent = (
-    <div className="grid grid-nogutter mt-3">
+    <div className="grid grid-nogutter">
       <div className="col-8">
         <InputTextarea
           style={{ width: "50vw" }}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           rows={1}
         />
       </div>
@@ -106,9 +92,7 @@ const Chat = (props) => {
           icon="pi pi-send"
           rounded
           size="lg"
-          onClick={() => {
-            sendmessage(value);
-          }}
+          onClick={sendMessage}
           texticon="pi pi-check"
           text
           tooltip="Send message"
@@ -116,12 +100,6 @@ const Chat = (props) => {
             position: "bottom",
           }}
         />
-        {/* <Button
-            icon="pi pi-send"
-            rounded
-            outlined
-            onClick={() => setVisible(false)}
-          /> */}
       </div>
     </div>
   );
@@ -160,61 +138,33 @@ const Chat = (props) => {
           <Dialog
             header={header}
             visible={visible}
-            style={{ width: "60vw" }}
+            style={{ width: "60vw", backgroundColor : "red"}}
             onHide={() => setVisible(false)}
             footer={footerContent}
             breakpoints={{ "960px": "85vw", "641px": "90vw" }}
           >
-            {connected ? (
-              <div
-                className="gif_img"
-                style={{
-                  height: "45%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <img
-                  id="home_img"
-                  src="/../images/loading_animation.gif"
-                  height={300}
-                />
-                <h3 className="text-center">Loading .....</h3>
-              </div>
-            ) : (
-              <div className="">
-                <ScrollPanel
-                  id="messageContainer"
-                  style={{ width: "100%", height: "150px", padding: "20px" }}
-                  className="custombar1 p-4 pt-0 mb-3"
-                ></ScrollPanel>
-              </div>
-            )}
+          <div style={{display : "flex", flexDirection : "column", alignItems : "flex-start"}}>
+      {messages.map((msg, i) => (
+        <div key={i} style={{padding : "5px", backgroundColor : "#E8F0FE", borderRadius : "5px", width : "fit-content", marginBottom : "25px", alignSelf : msg.username == userId ? "flex-end" : ""}}> {
+        }
+            <span style={{fontSize : "13px"}}>{msg.username}</span>
+          <p style={{fontSize : "15px"}}>{msg.message}</p>
+            <span style={{fontSize : "10px"}}>
+              {msg.__createdtime__ ? formatDateFromTimestamp(msg.__createdtime__) : "" }
+            </span>
+        </div>
+      ))}
+    </div>            
           </Dialog>
           <Button
             tooltip="Join Chat room"
             tooltipOptions={{ position: "top" }}
-            label="Create Room"
-            onClick={() => {
-              setVisible(true);
-            }}
+            label="Join Chat"
+            onClick={joinRoom}
             icon="pi pi-bolt"
             className="m-3 font-bold px-5 py-3 p-button-raised p-button-rounded   "
           />
         </div>
-
-        {/* <h2 className="text-center pt-3 pb-3">or</h2>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Button label="Join a room" size="lg" text />
-        </div> */}
       </div>
     </div>
   );

@@ -23,7 +23,8 @@ import CreateRoom from "./room_assets/CreateRoom";
 import { io } from "socket.io-client";
 import JoinRoom from "./room_assets/JoinRoom";
 
-const socketio = io("http://localhost:5000", { autoConnect: false });
+const socketio = io("http://localhost:8082");
+
 function App() {
   useFavicon("../images/logo.svg");
   return (
